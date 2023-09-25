@@ -1,0 +1,451 @@
+use("Campus_library");
+db.User.insertMany([
+        {
+          name: 'John',
+          lastname: 'Doe',
+          username: 'john_doe',
+          email: 'john@example.com',
+          password: 'hashed_password1',
+          phone: '123-456-7890',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Jane',
+          lastname: 'Smith',
+          username: 'jane_smith',
+          email: 'jane@example.com',
+          password: 'hashed_password2',
+          phone: '987-654-3210',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Alice',
+          lastname: 'Johnson',
+          username: 'alice_johnson',
+          email: 'alice@example.com',
+          password: 'hashed_password3',
+          phone: '555-123-4567',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Bob',
+          lastname: 'Brown',
+          username: 'bob_brown',
+          email: 'bob@example.com',
+          password: 'hashed_password4',
+          phone: '888-999-7777',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Eva',
+          lastname: 'Lee',
+          username: 'eva_lee',
+          email: 'eva@example.com',
+          password: 'hashed_password5',
+          phone: '777-888-5555',
+          rol: 'Usuario',
+        },
+        {
+          name: 'David',
+          lastname: 'Williams',
+          username: 'david_williams',
+          email: 'david@example.com',
+          password: 'hashed_password6',
+          phone: '666-555-4444',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Sarah',
+          lastname: 'Anderson',
+          username: 'sarah_anderson',
+          email: 'sarah@example.com',
+          password: 'hashed_password7',
+          phone: '444-333-2222',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Michael',
+          lastname: 'Clark',
+          username: 'michael_clark',
+          email: 'michael@example.com',
+          password: 'hashed_password8',
+          phone: '222-333-4444',
+          rol: 'Usuario',
+        },
+        {
+          name: 'Olivia',
+          lastname: 'Martin',
+          username: 'olivia_martin',
+          email: 'olivia@example.com',
+          password: 'hashed_password9',
+          phone: '111-222-3333',
+          rol: 'Usuario',
+        },
+        {
+          name: 'James',
+          lastname: 'Taylor',
+          username: 'james_taylor',
+          email: 'james@example.com',
+          password: 'hashed_password10',
+          phone: '999-888-7777',
+          rol: 'Usuario',
+        },
+    ]);
+
+// db.Product.insertMany([
+//     {
+//         name:
+//         author:
+//         company:
+//         serial:
+//         category:
+//         description:
+//         date_created:
+//         stock:
+//         image:
+//         qualify:
+//         pages:
+//     }
+// ])
+
+use("Campus_library");
+db.Product.insertMany(
+    [
+        {
+          "name": "How to Win Friends and Influence People",
+          "author": "Dale Carnegie",
+          "company": "Simon & Schuster",
+          "serial": "978-0-671-02730-2",
+          "category": "Self-help",
+          "description": "How to Win Friends and Influence People is a self-help book written by Dale Carnegie, published in 1936. Over 30 million copies have been sold worldwide, making it one of the best-selling books of all time. Carnegie argues that following his 30 principles of human relations will enable anyone to make a good first impression, win over new friends, and influence others to see their point of view.",
+          "date_created": "1936-10-20",
+          "stock": 10,
+          "image": "https://covers.openlibrary.org/b/id/986197-M.jpg",
+          "qualify": 4.5,
+          "pages": 246
+        },
+        {
+          "name": "The 7 Habits of Highly Effective People",
+          "author": "Stephen R. Covey",
+          "company": "Free Press",
+          "serial": "978-0-671-70861-0",
+          "category": "Self-help",
+          "description": "The 7 Habits of Highly Effective People is a self-help book written by Stephen R. Covey, first published in 1989. It has sold over 25 million copies worldwide. Covey argues that by following his seven habits, anyone can become more effective in their personal and professional life.",
+          "date_created": "1989-07-07",
+          "stock": 10,
+          "image": "https://covers.openlibrary.org/b/id/1292283-M.jpg",
+          "qualify": 4.5,
+          "pages": 432
+        },
+        {
+          "name": "Think and Grow Rich",
+          "author": "Napoleon Hill",
+          "company": "The Ralston Society",
+          "serial": "978-1-4516-3268-9",
+          "category": "Self-help",
+          "description": "Think and Grow Rich is a self-help book written by Napoleon Hill and published in 1937. It has sold over 100 million copies worldwide. Hill argues that by following his 13 principles of success, anyone can achieve their financial and personal goals.",
+          "date_created": "1937-02-17",
+          "stock": 10,
+          "image": "https://covers.openlibrary.org/b/id/82696-M.jpg",
+          "qualify": 4.5,
+          "pages": 256
+        },
+        {
+          "name": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",
+          "author": "Eric Ries",
+          "company": "Crown Business",
+          "serial": "978-0-307-88381-1",
+          "category": "Business",
+          "description": "The Lean Startup is a book written by Eric Ries that describes a scientific approach to creating and managing startups. Ries argues that startups should focus on building a minimum viable product (MVP), gathering feedback from customers, and using that feedback to iterate on their product and business model. The Lean Startup has been praised by entrepreneurs and investors alike, and it is considered to be one of the most important books on startups ever written.",
+          "date_created": "2011-09-13",
+          "stock": 10,
+          "image": "https://covers.openlibrary.org/b/id/1361396-M.jpg",
+          "qualify": 4.5,
+          "pages": 336
+        },     
+    {
+      "name": "Example Book Name",
+      "author": "Example Author",
+      "year": 2020,
+      "serial": "1234567890",
+      "category": "Fiction",
+      "description": "This is an example book description.",
+      "year_of_publication": "2020",
+      "stock": 10,
+      "image": "example_image.jpg",
+      "qualify": 4,
+      "pages": 300
+    },
+    {
+      "name": "Another Example Book",
+      "author": "Another Author",
+      "year": 2018,
+      "serial": "0987654321",
+      "category": "Non-Fiction",
+      "description": "This is another example book description.",
+      "year_of_publication": "2018",
+      "stock": 5,
+      "image": "another_example_image.jpg",
+      "qualify": 3,
+      "pages": 250
+    },
+    {
+      "name": "Third Example Book",
+      "author": "Third Author",
+      "year": 2015,
+      "serial": "5678901234",
+      "category": "Mystery",
+      "description": "This is a third example book description.",
+      "year_of_publication": "2015",
+      "stock": 3,
+      "image": "third_example_image.jpg",
+      "qualify": 5,
+      "pages": 400
+    },
+    {
+      "name": "Fourth Example Book",
+      "author": "Fourth Author",
+      "year": 2019,
+      "serial": "4321098765",
+      "category": "Romance",
+      "description": "This is a fourth example book description.",
+      "year_of_publication": "2019",
+      "stock": 8,
+      "image": "fourth_example_image.jpg",
+      "qualify": 4,
+      "pages": 350
+    },
+    {
+      "name": "Fifth Example Book",
+      "author": "Fifth Author",
+      "year": 2017,
+      "serial": "9012345678",
+      "category": "Science Fiction",
+      "description": "This is a fifth example book description.",
+      "year_of_publication": "2017",
+      "stock": 2,
+      "image": "fifth_example_image.jpg",
+      "qualify": 4,
+      "pages": 280
+    },
+    {
+      "name": "Sixth Example Book",
+      "author": "Sixth Author",
+      "year": 2021,
+      "serial": "6789012345",
+      "category": "Thriller",
+      "description": "This is a sixth example book description.",
+      "year_of_publication": "2021",
+      "stock": 6,
+      "image": "sixth_example_image.jpg",
+      "qualify": 5,
+      "pages": 320
+    },
+    {
+      "name": "Seventh Example Book",
+      "author": "Seventh Author",
+      "year": 2016,
+      "serial": "3456789012",
+      "category": "Fantasy",
+      "description": "This is a seventh example book description.",
+      "year_of_publication": "2016",
+      "stock": 4,
+      "image": "seventh_example_image.jpg",
+      "qualify": 4,
+      "pages": 380
+    },
+    {
+      "name": "Eighth Example Book",
+      "author": "Eighth Author",
+      "year": 2014,
+      "serial": "7890123456",
+      "category": "Biography",
+      "description": "This is an eighth example book description.",
+      "year_of_publication": "2014",
+      "stock": 7,
+      "image": "eighth_example_image.jpg",
+      "qualify": 3,
+      "pages": 270
+    },
+    {
+      "name": "Ninth Example Book",
+      "author": "Ninth Author",
+      "year": 2022,
+      "serial": "2345678901",
+      "category": "History",
+      "description": "This is a ninth example book description.",
+      "year_of_publication": "2022",
+      "stock": 1,
+      "image": "ninth_example_image.jpg",
+      "qualify": 5,
+      "pages": 400
+    },
+    {
+      "name": "Tenth Example Book",
+      "author": "Tenth Author",
+      "year": 2013,
+      "serial": "6789012345",
+      "category": "Self-Help",
+      "description": "This is a tenth example book description.",
+      "year_of_publication": "2013",
+      "stock": 9,
+      "image": "tenth_example_image.jpg",
+      "qualify": 4,
+      "pages": 300
+    },
+    {
+      "name": "Eleventh Example Book",
+      "author": "Eleventh Author",
+      "year": 2020,
+      "serial": "1234567890",
+      "category": "Fiction",
+      "description": "This is an eleventh example book description.",
+      "year_of_publication": "2020",
+      "stock": 10,
+      "image": "eleventh_example_image.jpg",
+      "qualify": 4,
+      "pages": 300
+    },
+    {
+      "name": "Twelfth Example Book",
+      "author": "Twelfth Author",
+      "year": 2018,
+      "serial": "0987654321",
+      "category": "Non-Fiction",
+      "description": "This is a twelfth example book description.",
+      "year_of_publication": "2018",
+      "stock": 5,
+      "image": "twelfth_example_image.jpg",
+      "qualify": 3,
+      "pages": 250
+    },
+    {
+      "name": "Thirteenth Example Book",
+      "author": "Thirteenth Author",
+      "year": 2015,
+      "serial": "5678901234",
+      "category": "Mystery",
+      "description": "This is a thirteenth example book description.",
+      "year_of_publication": "2015",
+      "stock": 3,
+      "image": "thirteenth_example_image.jpg",
+      "qualify": 5,
+      "pages": 400
+    },
+    {
+      "name": "Fourteenth Example Book",
+      "author": "Fourteenth Author",
+      "year": 2019,
+      "serial": "4321098765",
+      "category": "Romance",
+      "description": "This is a fourteenth example book description.",
+      "year_of_publication": "2019",
+      "stock": 8,
+      "image": "fourteenth_example_image.jpg",
+      "qualify": 4,
+      "pages": 350
+    },
+    {
+      "name": "Fifteenth Example Book",
+      "author": "Fifteenth Author",
+      "year": 2017,
+      "serial": "9012345678",
+      "category": "Science Fiction",
+      "description": "This is a fifteenth example book description.",
+      "year_of_publication": "2017",
+      "stock": 2,
+      "image": "fifteenth_example_image.jpg",
+      "qualify": 4,
+      "pages": 280
+    },
+    {
+      "name": "Sixteenth Example Book",
+      "author": "Sixteenth Author",
+      "year": 2021,
+      "serial": "6789012345",
+      "category": "Thriller",
+      "description": "This is a sixteenth example book description.",
+      "year_of_publication": "2021",
+      "stock": 6,
+      "image": "sixteenth_example_image.jpg",
+      "qualify": 5,
+      "pages": 320
+    },
+    {
+      "name": "Seventeenth Example Book",
+      "author": "Seventeenth Author",
+      "year": 2016,
+      "serial": "3456789012",
+      "category": "Fantasy",
+      "description": "This is a seventeenth example book description.",
+      "year_of_publication": "2016",
+      "stock": 4,
+      "image": "seventeenth_example_image.jpg",
+      "qualify": 4,
+      "pages": 380
+    },
+    {
+      "name": "Eighteenth Example Book",
+      "author": "Eighteenth Author",
+      "year": 2014,
+      "serial": "7890123456",
+      "category": "Biography",
+      "description": "This is an eighteenth example book description.",
+      "year_of_publication": "2014",
+      "stock": 7,
+      "image": "eighteenth_example_image.jpg",
+      "qualify": 3,
+      "pages": 270
+    },
+    {
+      "name": "Nineteenth Example Book",
+      "author": "Nineteenth Author",
+      "year": 2022,
+      "serial": "2345678901",
+      "category": "History",
+      "description": "This is a nineteenth example book description.",
+      "year_of_publication": "2022",
+      "stock": 1,
+      "image": "nineteenth_example_image.jpg",
+      "qualify": 5,
+      "pages": 400
+    },
+    {
+      "name": "Twentieth Example Book",
+      "author": "Twentieth Author",
+      "year": 2013,
+      "serial": "6789012345",
+      "category": "Self-Help",
+      "description": "This is a twentieth example book description.",
+      "year_of_publication": "2013",
+      "stock": 9,
+      "image": "twentieth_example_image.jpg",
+      "qualify": 4,
+      "pages": 300
+    }
+  ])
+/*Para diseñar la estructura de colecciones en MongoDB para tu aplicación de préstamo y reserva de libros, debes considerar cómo se relacionan los datos y cómo se utilizarán en la aplicación. Aquí hay una posible estructura de colecciones que podrías usar:
+
+1. **Usuarios:**
+   - Almacena la información de todos los usuarios registrados en la aplicación.
+   - Campos posibles: `_id`, `nombre`, `apellido`, `correo electrónico`, `contraseña`, `rol` (usuario, empleado, administrador), `historial de reservas`, `historial de préstamos`, etc.
+
+2. **Libros:**
+   - Almacena la información de todos los libros disponibles en la librería.
+   - Campos posibles: `_id`, `título`, `autor`, `género`, `descripción`, `año de publicación`, `disponibilidad`, `imagen de portada`, etc.
+
+3. **Reservas:**
+   - Almacena información sobre las reservas de libros realizadas por los usuarios.
+   - Campos posibles: `_id`, `usuario` (referencia al documento de usuario), `libro` (referencia al documento de libro), `fecha de reserva`, `estado` (pendiente, aprobada, rechazada), etc.
+
+4. **Préstamos:**
+   - Almacena información sobre los préstamos de libros realizados por los usuarios.
+   - Campos posibles: `_id`, `usuario` (referencia al documento de usuario), `libro` (referencia al documento de libro), `fecha de préstamo`, `fecha de devolución`, `estado` (activo, vencido, devuelto), etc.
+
+5. **Empleados:**
+   - Almacena información sobre los empleados de la librería.
+   - Campos posibles: `_id`, `nombre`, `apellido`, `correo electrónico`, `contraseña`, `rol` (empleado, administrador), `información de contacto`, etc.
+
+Esta estructura de colecciones es solo un punto de partida y puede ajustarse según las necesidades específicas de tu aplicación. Es importante definir adecuadamente los índices en la base de datos para mejorar la eficiencia de las consultas, especialmente si la base de datos crece con el tiempo.
+
+Además, debes considerar la seguridad de la base de datos y configurar permisos y autenticación adecuados para garantizar que solo las personas autorizadas puedan acceder y modificar los datos. También es esencial implementar validaciones y reglas de negocio en el backend para mantener la integridad de los datos y proporcionar una experiencia de usuario coherente en el frontend.*/
