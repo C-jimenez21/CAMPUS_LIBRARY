@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "backend": "nodemon api/app.js",
+    "backend": "nodemon --quiet api/app.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "1.5.0",
     "cors": "2.8.5",
     "express": "4.18.2",
     "express-rate-limit": "7.0.1",
@@ -19,6 +20,7 @@
     "express-validator": "7.0.1",
     "jose": "4.14.6",
     "mongodb": "6.1.0",
+    "morgan": "1.10.0",
     "passport": "0.6.0",
     "passport-http-bearer": "1.0.1",
     "react": "^18.2.0",
