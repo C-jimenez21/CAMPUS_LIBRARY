@@ -4,7 +4,7 @@ import cors from 'cors';
 import {loadEnv} from 'vite'
 
 import appUser from './routes/user.js';
-
+import appAuth from './routes/Auth.js';
 
 const env = loadEnv('development', process.cwd(), "VITE");
 
@@ -15,7 +15,8 @@ appExpress.use(morgan('dev'))
 appExpress.use(cors('*'))
 
 
-appExpress.use('/', appUser)
+appExpress.use('/api', appUser)
+appExpress.use('/', appAuth) 
 
 
 const config = {
