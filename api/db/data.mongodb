@@ -115,7 +115,7 @@ db.Product.insertMany(
           "name": "How to Win Friends and Influence People",
           "author": "Dale Carnegie",
           "company": "Simon & Schuster",
-          "serial": "978-0-671-02730-2",
+          "serial": "9780671027302",
           "category": "Self-help",
           "description": "How to Win Friends and Influence People is a self-help book written by Dale Carnegie, published in 1936. Over 30 million copies have been sold worldwide, making it one of the best-selling books of all time. Carnegie argues that following his 30 principles of human relations will enable anyone to make a good first impression, win over new friends, and influence others to see their point of view.",
           "date_created": "1936-10-20",
@@ -128,7 +128,7 @@ db.Product.insertMany(
           "name": "The 7 Habits of Highly Effective People",
           "author": "Stephen R. Covey",
           "company": "Free Press",
-          "serial": "978-0-671-70861-0",
+          "serial": "9780671708610",
           "category": "Self-help",
           "description": "The 7 Habits of Highly Effective People is a self-help book written by Stephen R. Covey, first published in 1989. It has sold over 25 million copies worldwide. Covey argues that by following his seven habits, anyone can become more effective in their personal and professional life.",
           "date_created": "1989-07-07",
@@ -141,7 +141,7 @@ db.Product.insertMany(
           "name": "Think and Grow Rich",
           "author": "Napoleon Hill",
           "company": "The Ralston Society",
-          "serial": "978-1-4516-3268-9",
+          "serial": "9781451632689",
           "category": "Self-help",
           "description": "Think and Grow Rich is a self-help book written by Napoleon Hill and published in 1937. It has sold over 100 million copies worldwide. Hill argues that by following his 13 principles of success, anyone can achieve their financial and personal goals.",
           "date_created": "1937-02-17",
@@ -154,7 +154,7 @@ db.Product.insertMany(
           "name": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses",
           "author": "Eric Ries",
           "company": "Crown Business",
-          "serial": "978-0-307-88381-1",
+          "serial": "9780307883811",
           "category": "Business",
           "description": "The Lean Startup is a book written by Eric Ries that describes a scientific approach to creating and managing startups. Ries argues that startups should focus on building a minimum viable product (MVP), gathering feedback from customers, and using that feedback to iterate on their product and business model. The Lean Startup has been praised by entrepreneurs and investors alike, and it is considered to be one of the most important books on startups ever written.",
           "date_created": "2011-09-13",
@@ -424,6 +424,113 @@ db.Product.insertMany(
       "pages": 300
     }
   ])
+
+
+
+
+
+use("Campus_library")
+db.Reserves.insertMany([
+  {
+    user: "john@example.com",
+    Product: "9780671027302",
+    reservedDate: ISODate("2023-10-21"),
+    state: "aprobada"
+  },
+  {
+    user: "bob@example.com",
+    Product: "9780671708610",
+    reservedDate: ISODate("2023-10-22"),
+    state: "rechazada"
+  },
+  {
+    user: "jane@example.com",
+    Product: "9780307883811",
+    reservedDate: ISODate("2023-10-23"),
+    state: "pendiente"
+  },
+  {
+    user: "eva@example.com",
+    Product: "9780307883811",
+    reservedDate: ISODate("2023-10-24"),
+    state: "aprobada"
+  },
+  {
+    user: "olivia@example.com",
+    Product: "9780671027302",
+    reservedDate: ISODate("2023-10-25"),
+    state: "pendiente"
+  }
+
+])
+
+
+use("Campus_library")
+db.Loans.insertMany([
+  {
+    user: "john@example.com",
+    Product: "9780671027302",
+    beguinDate: ISODate("2023-09-19"),
+    endDate: ISODate("2023-09-29"),
+    state: "devuelto"
+  },
+  {
+    user: "bob@example.com",
+    Product: "9780671708610",
+    beguinDate: ISODate("2023-09-09"),
+    endDate: ISODate("2023-09-19"),
+    state: "devuelto"
+  },
+  {
+    user: "jane@example.com",
+    Product: "9780307883811",
+    beguinDate: ISODate("2023-09-10"),
+    endDate: ISODate("2023-09-20"),
+    state: "vencido"
+  },
+  {
+    user: "eva@example.com",
+    Product: "9780307883811",
+    beguinDate: ISODate("2023-09-23"),
+    endDate: ISODate("2023-10-06"),
+    state: "devuelto"
+  },
+  {
+    user: "olivia@example.com",
+    Product: "9780671027302",
+    beguinDate: ISODate("2023-09-20"),
+    endDate: ISODate("2023-09-30"),
+    state: "vencido"
+  }
+
+])
+
+
+
+use("Campus_library")
+db.Loans.aggregate([
+  {
+    $lookup: {
+      from: "User",
+      localField: "user",
+      foreignField: "email",
+      as: "User"
+    }
+  },
+  {
+    $unwind:"$User"
+  },
+  {
+    $project: {
+      user:0,
+      _id:0,
+      "User._id":0,
+    }
+  }
+])
+
+
+
 /*Para diseñar la estructura de colecciones en MongoDB para tu aplicación de préstamo y reserva de libros, debes considerar cómo se relacionan los datos y cómo se utilizarán en la aplicación. Aquí hay una posible estructura de colecciones que podrías usar:
 
 1. **Usuarios:**
