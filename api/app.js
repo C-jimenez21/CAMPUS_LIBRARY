@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import cookieParser from "cookie-parser";
+
 import {loadEnv} from 'vite'
 
 import appUser from './routes/user.js';
@@ -12,6 +14,7 @@ const appExpress = express()
 
 appExpress.use(express.json())
 appExpress.use(morgan('dev'))
+appExpress.use(cookieParser());
 appExpress.use(cors('*'))
 
 
