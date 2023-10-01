@@ -7,7 +7,8 @@ import { generateToken } from '../../middlewares/Token.js';
 
 export const register = async (req, res) => {
     try {
-        const { name, lastname, username, email, phone, password, rol } = req.body;
+        const { name, lastname, username, email, phone, password, rol } = req.data;
+        console.log(req.data);
         let colecction = await genCollection('User')
         let userExists = await colecction.findOne({ "email": email })
         console.log(userExists);
@@ -39,7 +40,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
 
-    const { email, password } = req.body;
+    const { email, password } = req.data;
     try {
     
         let colecction = await genCollection('User')

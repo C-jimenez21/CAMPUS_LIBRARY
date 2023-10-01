@@ -7,6 +7,7 @@ import {loadEnv} from 'vite'
 
 import appUser from './routes/user.js';
 import appAuth from './routes/Auth.js';
+import appProducts from './routes/Products.js';
 
 const env = loadEnv('development', process.cwd(), "VITE");
 
@@ -18,7 +19,8 @@ appExpress.use(cookieParser());
 appExpress.use(cors('*'))
 
 
-appExpress.use('/api', appUser)
+appExpress.use('/api/user', appUser)
+appExpress.use('/api/products', appProducts)
 appExpress.use('/', appAuth) 
 
 
