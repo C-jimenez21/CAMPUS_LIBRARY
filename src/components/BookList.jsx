@@ -34,7 +34,6 @@ export default async function BookList() {
           <ul>
             {books.map((book) => (
               <li key={book._id}>
-                
                 {book.name}
                 </li>
              

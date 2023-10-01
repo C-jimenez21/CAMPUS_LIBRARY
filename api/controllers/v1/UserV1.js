@@ -4,9 +4,14 @@ import genCollection from "../../helpers/fastConnect.js"
 //let db = await con()
 
 export const getDataUserV1 = async(req, res) => {
+   try {
+    console.log(req.user);
     const coleccion =  await genCollection("User");
     let result = await coleccion.find().toArray();
     res.send(result).status(200)
+   } catch (error) {
+    console.log(error);
+   }
 }
 
 export const PostUserV1 = async(req, res) => {
@@ -26,9 +31,14 @@ export const PostUserV1 = async(req, res) => {
 
 
 export const getDataProductV1 = async(req, res) => {
+  try {
     const coleccion =  await genCollection("Product");
     let result = await coleccion.find().toArray();
     res.send(result).status(200)
+  } catch (error) {
+    res.status(404).json({message:'Something went wrong'})
+    console.log(error);
+  }
 }
 
 export const getDataReserveV1 = async(req, res) => {
