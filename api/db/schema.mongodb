@@ -1,1 +1,56 @@
 //Schemas database
+use("Campus_library");
+db.createCollection("User",{
+    capped:true,
+    size:3000,
+    max:100,
+    validator:{
+        $jsonSchema:{
+            bsonType: "object",
+            additionalProperties: false,
+            required : ['_id','email','username', 'password','rol' ],
+            properties:{
+                _id:{
+                    bsonType: 'objectId',
+                    description : "El _id es un parametro obligatorio y debe ser un objectid"
+                },
+                name:{  
+                    bsonType: 'string',
+                    description : "El name es un parametro obligatorio y debe ser un string",
+                    minLength: 1
+                },
+                lastname:{  
+                    bsonType: 'string',
+                    description : "El lastname es un parametro obligatorio y debe ser un string",
+                    minLength: 1
+                }, 
+                username:{  
+                    bsonType: 'string',
+                    description : "El username es un parametro obligatorio y debe ser un string",
+                    minLength: 1
+                },
+                email:{  
+                    bsonType: 'string',
+                    description : "El email es un parametro obligatorio y debe ser un string",
+                    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                },
+                password:{  
+                    bsonType: 'string',
+                    description : "El password es un parametro obligatorio y debe ser un string",
+                    minLength: 6
+                },
+                phone:{  
+                    bsonType: 'int',
+                    description : "El phone es un parametro obligatorio y debe ser un int"
+                },
+                rol:{  
+                    bsonType: 'string',
+                    enum: ["Usuario", "Empleado", "Admin"],
+                    description : "El rol es un parametro obligatorio y debe ser un string"
+                }
+        }
+    }
+}
+}); 
+
+db.User.createIndex( { "email": 1, "username": 1 }, { unique: true } )

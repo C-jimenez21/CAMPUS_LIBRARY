@@ -1,8 +1,8 @@
-import  {con}  from '../config/atlas.js';
+import  {connection}  from '../config/atlas.js';
 
 const genCollection = async (coleccion) => {
     try {
-        let db = await con();
+        let db = await connection();
         let newCollection = db.collection(coleccion)
         return newCollection;
     } catch (error) {

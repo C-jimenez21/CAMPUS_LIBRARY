@@ -1,3 +1,20 @@
+
+/*
+use("Campus_library");
+db.User.insertOne(
+        {
+          name: 'John',
+          lastname: 'Doe',
+          username: 'john_doe23',
+          email: 'john23@example.com',
+          password: 'hashed_password1',
+          phone: 1234567890,
+          rol: 'Empleado'
+        }
+)
+*/
+
+
 use("Campus_library");
 db.User.insertMany([
         {
@@ -6,7 +23,7 @@ db.User.insertMany([
           username: 'john_doe',
           email: 'john@example.com',
           password: 'hashed_password1',
-          phone: '123-456-7890',
+          phone: 1234567890,
           rol: 'Usuario',
         },
         {
@@ -15,7 +32,7 @@ db.User.insertMany([
           username: 'jane_smith',
           email: 'jane@example.com',
           password: 'hashed_password2',
-          phone: '987-654-3210',
+          phone: 9876543210,
           rol: 'Usuario',
         },
         {
@@ -24,8 +41,8 @@ db.User.insertMany([
           username: 'alice_johnson',
           email: 'alice@example.com',
           password: 'hashed_password3',
-          phone: '555-123-4567',
-          rol: 'Usuario',
+          phone: 5551234567,
+          rol: 'Admin',
         },
         {
           name: 'Bob',
@@ -33,7 +50,7 @@ db.User.insertMany([
           username: 'bob_brown',
           email: 'bob@example.com',
           password: 'hashed_password4',
-          phone: '888-999-7777',
+          phone: 8889997777,
           rol: 'Usuario',
         },
         {
@@ -42,8 +59,8 @@ db.User.insertMany([
           username: 'eva_lee',
           email: 'eva@example.com',
           password: 'hashed_password5',
-          phone: '777-888-5555',
-          rol: 'Usuario',
+          phone: 7778885555,
+          rol: 'Empleado',
         },
         {
           name: 'David',
@@ -51,7 +68,7 @@ db.User.insertMany([
           username: 'david_williams',
           email: 'david@example.com',
           password: 'hashed_password6',
-          phone: '666-555-4444',
+          phone: 6665554444,
           rol: 'Usuario',
         },
         {
@@ -60,7 +77,7 @@ db.User.insertMany([
           username: 'sarah_anderson',
           email: 'sarah@example.com',
           password: 'hashed_password7',
-          phone: '444-333-2222',
+          phone: 4443332222,
           rol: 'Usuario',
         },
         {
@@ -69,8 +86,8 @@ db.User.insertMany([
           username: 'michael_clark',
           email: 'michael@example.com',
           password: 'hashed_password8',
-          phone: '222-333-4444',
-          rol: 'Usuario',
+          phone: 2223334444,
+          rol: 'Empleado',
         },
         {
           name: 'Olivia',
@@ -78,7 +95,7 @@ db.User.insertMany([
           username: 'olivia_martin',
           email: 'olivia@example.com',
           password: 'hashed_password9',
-          phone: '111-222-3333',
+          phone: 1112223333,
           rol: 'Usuario',
         },
         {
@@ -87,10 +104,11 @@ db.User.insertMany([
           username: 'james_taylor',
           email: 'james@example.com',
           password: 'hashed_password10',
-          phone: '999-888-7777',
+          phone: 9998887777,
           rol: 'Usuario',
-        },
+        }
     ]);
+    
 
 // db.Product.insertMany([
 //     {
