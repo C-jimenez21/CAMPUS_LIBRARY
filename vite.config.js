@@ -9,5 +9,6 @@ export default defineConfig({
   server: {
     "host": env.VITE_HOSTNAME,
     "port": env.VITE_PORT_FRONTEND
-  }
+  },
+  envDir: '.',
 })

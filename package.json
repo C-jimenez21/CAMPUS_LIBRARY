@@ -11,6 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
     "axios": "1.5.0",
     "bcrypt": "5.1.1",
     "cookie-parser": "1.4.6",
@@ -21,12 +25,15 @@
     "express-session": "1.17.3",
     "express-validator": "7.0.1",
     "jose": "4.14.6",
+    "js-cookie": "3.0.5",
     "mongodb": "6.1.0",
     "morgan": "1.10.0",
     "passport": "0.6.0",
     "passport-http-bearer": "1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "7.47.0",
+    "react-router-dom": "6.16.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
