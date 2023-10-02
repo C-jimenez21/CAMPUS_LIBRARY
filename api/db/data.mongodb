@@ -411,7 +411,7 @@ db.Reserves.insertMany([
     user: "olivia@example.com",
     Product: "9780671027302",
     reservedDate: ISODate("2023-10-25"),
-    state: "pendiente"
+    state: "completada"
   }
 
 ])
