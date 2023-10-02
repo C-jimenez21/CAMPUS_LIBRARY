@@ -1,7 +1,7 @@
 //user routers
 import { Router } from "express";
 import { getDataUserV1, getDataReserveV1, getDataLoanV1 } from "../controllers/v1/UserV1.js";
-import { validateToken } from "../middlewares/Token.js";
+import { validateToken } from "../middlewares/token.js";
 const appUser = Router();
 
 

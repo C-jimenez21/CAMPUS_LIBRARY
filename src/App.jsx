@@ -8,7 +8,9 @@ import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
 import ProtectedRoutes from './Auth/ProtectedRoutes';
 import Notfound from './pages/Notfound';
-
+import ListaLibros from './components/ListaLibros';
+import DynamicBooks from './components/DynamicBooks';
+import PruebaLista from './components/pruebaLista';
 export default function App() {
   return (
     <AuthProvider >
@@ -22,7 +24,11 @@ export default function App() {
             <Route path='/profile' element={<Profile/>}  />
             <Route path='/task' element={<Profile/>}  />
         </Route>
+        
         <Route path='/Notfound' element={<Notfound/>}></Route>
+        <Route path='/list' element={<ListaLibros/>}></Route>
+        <Route path='/boks' element={<DynamicBooks/>}></Route>
+        <Route path='/pruebaBooks' element={<PruebaLista/>}></Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

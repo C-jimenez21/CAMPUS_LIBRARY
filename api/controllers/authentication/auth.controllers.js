@@ -3,7 +3,7 @@ import genCollection from '../../helpers/fastConnect.js';
 
 
 import { ObjectId } from 'mongodb';
-import { generateToken } from '../../middlewares/Token.js';
+import { generateToken } from '../../middlewares/token.js';
 
 export const register = async (req, res) => {
     try {
