@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,19 +21,19 @@ import { useNavigate, Link } from 'react-router-dom';
 
 
 export default function SignUp() {
-  const {register,  handleSubmit, formState: {errors}} = useForm();
-  const {signUpRegister, isAuthenticated, errors: registerErrors} = useAuth()
-  
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { signUpRegister, isAuthenticated, errors: registerErrors } = useAuth()
+
   const Navigate = useNavigate();
 
-  const handleSubmitMUI = handleSubmit(async(values) => {
-    let dataUser = {...values, rol:"Usuario"}
+  const handleSubmitMUI = handleSubmit(async (values) => {
+    let dataUser = { ...values, rol: "Usuario" }
     console.log(dataUser);
-   signUpRegister(dataUser);
+    signUpRegister(dataUser);
   })
 
   useEffect(() => {
-    if(isAuthenticated) Navigate('/profile')
+    if (isAuthenticated) Navigate('/profile')
   }, [isAuthenticated])
 
   return (
@@ -47,53 +47,53 @@ export default function SignUp() {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-          >
-          <Avatar sx={{ m:2, bgcolor: 'brown' }}>
+        >
+          <Avatar sx={{ m: 2, bgcolor: 'brown' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h4">
             Register
           </Typography>
-          <Stack sx={{ width: '100%', mt:6 }} spacing={1}>
-          {
-            registerErrors.map((error, i)=>(
-              <Alert severity="error" key={i}>
-             {error}
-            </Alert>   
-            ))
-          }
+          <Stack sx={{ width: '100%', mt: 6 }} spacing={1}>
+            {
+              registerErrors.map((error, i) => (
+                <Alert severity="error" key={i}>
+                  {error}
+                </Alert>
+              ))
+            }
           </Stack>
 
-        
-            
+
+
           <Box component="form" noValidate onSubmit={handleSubmitMUI} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-            <Grid item xs={6} >
+              <Grid item xs={6} >
                 <TextField
-                type='text'
+                  type='text'
                   fullWidth
                   name="name"
                   id="name"
                   label="name"
                   autoComplete='true'
-                  {...register('name',{required:false} )}
+                  {...register('name', { required: false })}
                 />
-               
+
               </Grid>
               <Grid item xs={6} >
                 <TextField
-                type='text'
+                  type='text'
                   fullWidth
                   name="lastname"
                   id="lastname"
                   label="lastname"
                   autoComplete='true'
-                  {...register('lastname',{required:false} )}
+                  {...register('lastname', { required: false })}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                type='email'
+                  type='email'
                   required
                   fullWidth
                   id="email"
@@ -101,28 +101,28 @@ export default function SignUp() {
                   name="email"
                   autoComplete='true'
 
-                  {...register('email',{required:true} )}
+                  {...register('email', { required: true })}
 
-                  />
-                   {
+                />
+                {
                   errors.email && <Alert severity="warning">email is required</Alert>
-                  
+
                 }
               </Grid>
               <Grid item xs={8} >
                 <TextField
-                type='text'
+                  type='text'
                   required
                   fullWidth
                   name="username"
                   id="username"
                   label="Username"
                   autoComplete='true'
-                  {...register('username',{required:true} )}
+                  {...register('username', { required: true })}
                 />
                 {
                   errors.username && <Alert severity="warning">Username is required</Alert>
-                  
+
                 }
               </Grid>
               <Grid item xs={4}>
@@ -134,9 +134,9 @@ export default function SignUp() {
                   id="phone"
                   autoComplete='true'
 
-                  {...register('phone',{required:false} )}
+                  {...register('phone', { required: false })}
                 />
-      
+
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -148,11 +148,11 @@ export default function SignUp() {
                   id="password"
                   autoComplete='true'
 
-                  {...register('password',{required:true} )}
+                  {...register('password', { required: true })}
                 />
-                 {
+                {
                   errors.password && <Alert severity="warning">password is required</Alert>
-                  
+
                 }
               </Grid>
             </Grid>
@@ -174,11 +174,11 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-      
+
       </Container>
-      
-    
-      
-              </> 
+
+
+
+    </>
   );
 }
