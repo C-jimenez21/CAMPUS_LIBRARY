@@ -21,22 +21,22 @@ const validateToken = async (req, res, next) => {
     try {
         const { token } = req.cookies
         console.log(token);
-        if(!token){return res.status(401).send({message: "Not token, authorization denied"})}
+        if (!token) { return res.status(401).send({ message: "Not token, authorization denied" }) }
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             token,
             encoder.encode(env.JWT_KEY)
-            );
-            let db = await connection()
-        let colecction =  db.collection('User')
-        const userFound = await colecction.findOne({email: jwtData.payload.email})
-    console.log(userFound);
-        if(!userFound) { return res.status(403).json({error: ['Invalid Token']}) }
+        );
+        let db = await connection()
+        let colecction = db.collection('User')
+        const userFound = await colecction.findOne({ email: jwtData.payload.email })
+        console.log(userFound);
+        if (!userFound) { return res.status(403).json({ error: ['Invalid Token'] }) }
         req.user = userFound;
         next();
     } catch (error) {
         console.log(error);
-        return res.status(403).json({error: ['Invalid Token']})
+        return res.status(403).json({ error: ['Invalid Token'] })
     }
 }
 
