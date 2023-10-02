@@ -16,10 +16,9 @@ const appExpress = express()
 appExpress.use(express.json())
 appExpress.use(morgan('dev'))
 appExpress.use(cookieParser());
-appExpress.use(cors('*'))
+appExpress.use(cors({origin: `http://${ env.VITE_HOSTNAME}:${env.VITE_PORT_FRONTEND }`, credentials:true}));
 
 appExpress.use('/', appAuth) 
-
 appExpress.use('/api/User', appUser)
 appExpress.use('/api/Products', appProducts)
 appExpress.use('/api/Loans', appLoans)

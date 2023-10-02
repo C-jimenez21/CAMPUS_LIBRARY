@@ -7,6 +7,7 @@ const appUser = Router();
 
 appUser.get('/profile', validateToken, getDataUserV1);
 
+appUser.get('/pruebas', getDataUserV1);
 
 
 export default appUser  

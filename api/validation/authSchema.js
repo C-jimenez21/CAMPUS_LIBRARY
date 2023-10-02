@@ -38,7 +38,7 @@ export const registerSchema = z.object({
       message: "Password must be at least 6 characters",
     }),
     phone: z
-    .number({
+    .string({
       required_error: "phone is required",
       invalid_type_error: "phone must be a int",
     })
