@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
 import ProtectedRoutes from './Auth/ProtectedRoutes';
+import Unauthorized from './pages/Unauthorized';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path='/profile' element={<Profile/>}  />
             <Route path='/task' element={<Profile/>}  />
         </Route>
+        <Route path='/Unauthorized' element={<Unauthorized/>}></Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
