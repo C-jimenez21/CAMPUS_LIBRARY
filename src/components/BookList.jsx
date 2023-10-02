@@ -33,7 +33,7 @@ function DynamicTable() {
       <h1>Tabla Dinámica</h1>
       <table>
         <thead>
-          <tr>
+          <tr className='table'>
               <th>ID</th>
               <th>name</th>
               <th>lastname</th>
