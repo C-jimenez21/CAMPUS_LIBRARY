@@ -71,6 +71,7 @@ const logOut = () => {
 
         try {
             const response = await profileReq()
+           
             if(!response.data){
                 setIsAuthenticaded(false);
                 setLoading(false);
@@ -82,8 +83,9 @@ const logOut = () => {
             setLoading(false)
             //if(!response.data) setIsAuthenticaded(false)
         } catch (error) {
-            console.log(error);
+            console.log({"erorr de axiois":error});
             setIsAuthenticaded(false)
+            setLoading(false)
             setUser(null)
 
         }
