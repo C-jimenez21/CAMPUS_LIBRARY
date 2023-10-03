@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react'
-import "../css/Products.css"
-
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import axios from 'axios';
 const url = import.meta.env
+import responseForProducts from "../API/JSON/Products.json"
+
+import "../css/Products.css"
+import { Link } from 'react-router-dom';
+
 export default function PruebaLista() {
     const [products, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     
     async function bringData() {
       try {
-        const response = await axios.get(`http://${url.VITE_HOSTNAME}:${url.VITE_PORT_BACKEND}/api/Products`);
-        console.log(response.data);
-        setBooks(response.data);
+        console.log(responseForProducts.products);
+        setBooks(responseForProducts.products);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
@@ -28,17 +31,18 @@ export default function PruebaLista() {
         <main className='products'>
             <ul>
                 {products.map(product =>(
-                <li key={product._id}>
+                  <li key={product._id}>
+                  <span>Stock: {product.stock}</span>
                     <img 
                         src={product.image} 
                         alt={product.name }
                     />
                     <div>
-                        <strong>{product.name}</strong>
+                  <strong>{product.name}</strong><br />
                     </div>
                     <div>
                         <button>
-                            Resevar
+                            <Link to={`/Product/${product._id}`}><ReadMoreIcon /></Link>
                         </button>
                     </div>
                     </li>
