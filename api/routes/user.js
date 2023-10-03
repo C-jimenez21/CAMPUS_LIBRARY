@@ -1,13 +1,14 @@
 //user routers
 import { Router } from "express";
-import { getDataUserV1, getDataReserveV1, getDataLoanV1 } from "../controllers/v1/UserV1.js";
+import { getDataUserV1, getDataUserById,  } from "../controllers/v1/UserV1.js";
+import { profile } from "../controllers/authentication/auth.controllers.js";
 import { validateToken } from "../middlewares/token.js";
 const appUser = Router();
 
 
-appUser.get('/profile', validateToken, getDataUserV1);
 
 appUser.get('/pruebas', getDataUserV1);
+appUser.get('/:id', getDataUserById)
 
 
 export default appUser  

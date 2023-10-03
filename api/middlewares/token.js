@@ -21,7 +21,7 @@ const validateToken = async (req, res, next) => {
     try {
         const { token } = req.cookies
         console.log(token);
-        if (!token) { return res.status(401).send({ message: "Not token, authorization denied" }) }
+        if (!token) { return res.status(403).send({ message: "Not token, authorization denied" }) }
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             token,
@@ -36,7 +36,8 @@ const validateToken = async (req, res, next) => {
         next();
     } catch (error) {
         console.log(error);
-        return res.status(403).json({ error: ['Invalid Token'] })
+        res.status(403).json({ error: ['Invalid Token'] })
+        return false; 
     }
 }
 
