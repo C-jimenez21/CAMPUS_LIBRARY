@@ -1,4 +1,5 @@
 //functions v1
+import { ObjectId } from "mongodb";
 import genCollection from "../../helpers/fastConnect.js"
 //import { con } from "../../config/atlas.js";
 //let db = await con()
@@ -14,21 +15,17 @@ export const getDataUserV1 = async (req, res) => {
   }
 }
 
-export const PostUserV1 = async (req, res) => {
+
+export const getDataUserById = async (req, res) => {
   try {
-    //Validar la informacion
-
-    //Revisar si este usuario ya se encuentra en la base de datos
-
-    //Realizar el registro en la base de datos
-
-    //Si todo se realizo de manera correcta se genere el token
-
+    console.log(req.user);
+    const coleccion = await genCollection("User");
+    let result = await coleccion.findOne({_id: new ObjectId(req.params.id)}).toArray();
+    res.send(result).status(200)
   } catch (error) {
-
+    console.log(error);
   }
 }
-
 
 
 

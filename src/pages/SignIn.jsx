@@ -22,7 +22,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { signInLogin, isAuthenticated, user, errors: registerErrors } = useAuth()
+  const { signInLogin, isAuthenticated, logOut, user, errors: registerErrors } = useAuth()
 
   const handleSubmitMUI = handleSubmit(async (values) => {
     signInLogin(values);
@@ -44,7 +44,8 @@ export default function SignIn() {
           Navigate('/profile3');
           break
         default:
-          Navigate('/Unauthorized');
+          logOut();
+          Navigate('/Notfound');
           break;
       }
   }, [isAuthenticated])

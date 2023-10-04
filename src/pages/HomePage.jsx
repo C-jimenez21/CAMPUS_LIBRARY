@@ -15,32 +15,33 @@ export default function HomePage() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position='fixed' color="transparent">
           <Toolbar>
-            <MenuBookIcon></MenuBookIcon>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 3 }}>
+            <MenuBookIcon color='primary'></MenuBookIcon>
+            <Typography color='primary' variant="h6" component="div" sx={{ flexGrow: 1, ml: 3 }}>
 
               Campus Library
             </Typography>
 
             <Link to="/register" >
-              <Button variant='contained' color="inherit">Register</Button>
+              <Button variant='contained' color="primary">Register</Button>
             </Link>
             <Link to="/login">
-              <Button sx={{ ml: 3 }} variant='contained' color="inherit">Login</Button>
+              <Button sx={{ ml: 3 }} variant='contained' color="success">Login</Button>
             </Link>
           </Toolbar>
         </AppBar>
       </Box>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center', // Centrar horizontalmente
-        alignItems: 'center',     // Centrar verticalmente
-        height: '100vh'
-      }}>
-        <img src='https://wallpaperaccess.com/full/521035.jpg' />
-      </Box>
 {/*
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center', // Centrar horizontalmente
+          alignItems: 'center',     // Centrar verticalmente
+          height: '100vh',
+          width: '100%'
+        }}>
+     
+        </Box>
       <Box sx={{
         display: 'flex',
         justifyContent: 'center', // Centrar horizontalmente
@@ -49,7 +50,7 @@ export default function HomePage() {
       }}>
         <DynamicBooks />
       </Box>
-    */}
+   
 <Box sx={{
         display: 'flex',
         justifyContent: 'center', // Centrar horizontalmente
@@ -58,6 +59,7 @@ export default function HomePage() {
       }}>
         <DynamicTable />
       </Box>
+       */}
     </>
   )
 }

@@ -18,6 +18,22 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useAuth } from '../context/authContext';
 import { Link } from 'react-router-dom';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import FolderIcon from '@mui/icons-material/Folder';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,7 +41,60 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Profile() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [value, setValue] = React.useState('recents');
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton onClick={() => console.log({text})}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -43,7 +112,7 @@ function Profile() {
 
 
   const { user, logOut } = useAuth()
-  console.log(user);
+
 
   return (
     <>
@@ -69,13 +138,13 @@ function Profile() {
               LOGO
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleOpenNavMenu}
+                onClick={toggleDrawer("left", true)}
                 color="inherit"
               >
                 <MenuIcon />
@@ -105,7 +174,7 @@ function Profile() {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <AdbIcon sx={{ display: {  md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
@@ -113,7 +182,7 @@ function Profile() {
               href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
-                display: { xs: 'flex', md: 'none' },
+                display: {  md: 'none' },
                 flexGrow: 1,
                 fontFamily: 'monospace',
                 fontWeight: 700,
@@ -125,15 +194,7 @@ function Profile() {
               LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
+            
             </Box>
             <Link to={"/login"}>
               <Button variant="contained" color="error" onClick={() => logOut()}>Log Out</Button>
@@ -141,26 +202,51 @@ function Profile() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+
+
+      
+   
+
+      
+      <div>
+      {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+
+
+
+
+      {/* <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
+      <BottomNavigationAction
+        label="Recents"
+        value="recents"
+        icon={<RestoreIcon />}
+      />
+      <BottomNavigationAction
+        label="Favorites"
+        value="favorites"
+        icon={<FavoriteIcon />}
+      />
+      <BottomNavigationAction
+        label="Nearby"
+        value="nearby"
+        icon={<LocationOnIcon />}
+      />
+      <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+    </BottomNavigation>
+     */}
+
+     
     </>
 
   );

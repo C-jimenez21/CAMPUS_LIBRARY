@@ -493,7 +493,7 @@ export const postLoan = async (req, res) => {
     try {
         //Validar la informacion
         const { user, product, beguinDate, endDate, state= "pediente" } = req.data
-
+console.log(req.data);
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
         const isMatchA = await UserCol.findOne({ email: user });
