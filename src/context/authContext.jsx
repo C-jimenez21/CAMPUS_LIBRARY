@@ -25,6 +25,7 @@ export const AuthProvider = ({children})=>{
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticaded(true)
+            setLoading(false)
         } catch (errors) {
             console.log(errors.response.data.error);
             setErrors(errors.response.data.error);
@@ -37,6 +38,7 @@ export const AuthProvider = ({children})=>{
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticaded(true)
+            setLoading(false)
         } catch (errors) {
             console.log(errors.response.data.error);
             setErrors(errors.response.data.error);
@@ -62,7 +64,7 @@ const logOut = () => {
  useEffect(() =>{
    async function checkLogin(){
     const cookies = Cookies.get()
-    //console.log(cookies);
+    console.log(cookies);
     if(!cookies.token){
         setIsAuthenticaded(false)
         setLoading(false)

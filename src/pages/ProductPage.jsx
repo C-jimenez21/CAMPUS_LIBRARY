@@ -57,7 +57,7 @@ export default function ProductPage() {
             const formatData = { "reservedDate": reservedDate, "user": user.email, "product": product.serial, "state": "pendiente" }
             const res = await postReserveUser(formatData)
             console.log({ "values form": formatData, "response": res });
-            Navigate(`/Reserves/${user.email}`)
+            Navigate(`/reserves`)
         } catch (error) {
             console.log(error);
             alert("Ocurrio un error")
@@ -127,7 +127,7 @@ export default function ProductPage() {
                         type='date'
                         min={dayjs().format('YYYY-MM-DD')} max={(dayjs().add(15, 'day')).format('YYYY-MM-DD')}
                         className='w-full bg-zinc-100 text-black px-4 py-2 rounded-md my-2'
-                        
+                        required
 
                         defaultValue={(dayjs().add(15, 'day')).format('YYYY-MM-DD')}
                         {...register('endDate', { required: true })}

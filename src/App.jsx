@@ -42,7 +42,7 @@ export default function App() {
             <Route path="/list" element={<ListaLibros />}></Route>
             <Route path="/Notfound" element={<Notfound />}></Route>
             <Route path="/tailwind" element={<Tildwind />}></Route>
-            <Route path="/table" element={<LoansByUser />}></Route>
+            <Route path="/reserves" element={<LoansByUser />}></Route>
           </Routes>
         </UserProvider>
       </BrowserRouter>
