@@ -13,10 +13,10 @@ export const useProducts = () => {
     return context;
 }
 
-
-
 export function UserProvider({ children }) {
     const [product, setProduct] = useState([])
+    const [loan, setLoan] = useState([])
+    const [reserve, setReserve] = useState([])
     const [errors, setErrors] = useState([])
 
 
@@ -35,15 +35,26 @@ export function UserProvider({ children }) {
     const postLoanUser = async (data) => {
         try {
             const res = await postLoans(data)
-            alert("Se registro con exito")        
-            setProduct(res.data)
+            alert(res.data.message)        
+            setLoan(res.data)
             console.log(res);
         } catch (errors) {
             console.log(errors.response.data.error);
             setErrors(errors.response.data.error);
         }
     }
-
+ 
+    const postReserveUser = async (data) =>{
+        try {
+            const res = await postReserves(data)
+            alert("Se registro con exito")        
+            setReserve(res.data)
+            console.log(res);
+        } catch (error) {
+            console.log(errors.response.data.error);
+            setErrors(errors.response.data.error);
+        }
+    }
 
     return (
         <>
@@ -51,6 +62,7 @@ export function UserProvider({ children }) {
                 getProductID,
                 product,
                 postLoanUser,
+                postReserveUser,
                 errors
 
             }}>

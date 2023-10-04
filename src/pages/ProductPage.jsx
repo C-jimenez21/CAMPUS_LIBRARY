@@ -23,7 +23,7 @@ const style = {
 
 export default function ProductPage() {
 
-    const { getProductID, product, postLoanUser, errors: ReserveAndLoanError } = useProducts()
+    const { getProductID, product, postLoanUser, errors: ReserveAndLoanError, postReserveUser } = useProducts()
     const { user } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -54,10 +54,10 @@ export default function ProductPage() {
     const handleSubmitMUI2 = handleSubmit(async (values) => {
         try {
             const { reservedDate } = values
-            const formatData = { "reservedDate": reservedDate, "user": user.email, "product": product.serial }
-            //const res = await postLoanUser(formatData)
-            console.log({ "values form": formatData });
-            //Navigate(`/Reserves/${user.email}`)
+            const formatData = { "reservedDate": reservedDate, "user": user.email, "product": product.serial, "state": "pendiente" }
+            const res = await postReserveUser(formatData)
+            console.log({ "values form": formatData, "response": res });
+            Navigate(`/Reserves/${user.email}`)
         } catch (error) {
             console.log(error);
             alert("Ocurrio un error")
@@ -80,7 +80,7 @@ export default function ProductPage() {
         if (params.id) {
             bringData()
         }
-    }, [open, open2])
+    }, [])
 
     return (
         <>
@@ -127,7 +127,7 @@ export default function ProductPage() {
                         type='date'
                         min={dayjs().format('YYYY-MM-DD')} max={(dayjs().add(15, 'day')).format('YYYY-MM-DD')}
                         className='w-full bg-zinc-100 text-black px-4 py-2 rounded-md my-2'
-                        required
+                        
 
                         defaultValue={(dayjs().add(15, 'day')).format('YYYY-MM-DD')}
                         {...register('endDate', { required: true })}
