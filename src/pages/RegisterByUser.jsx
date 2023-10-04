@@ -32,7 +32,7 @@ export default function LoansByUser() {
 
         <>
             <Container maxWidth="xl" sx={{ mt: 5 }}>
-                <BasicTable data={reserve} loan={false}/>
+                <BasicTable data={reserve} loan={true}/>
             </Container>
         </>
 
