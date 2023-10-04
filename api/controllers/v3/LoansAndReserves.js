@@ -222,7 +222,7 @@ export const postReserve = async (req, res) => {
     try {
         //Validar la informacion
         const {  product, reservedDate, state } = req.data
-        const { email: user} = req.user
+        const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
         const isMatchA = await UserCol.findOne({ email: user });
@@ -241,6 +241,7 @@ export const postReserve = async (req, res) => {
             reservedDate: new Date(reservedDate),
             state
         }
+
         console.log(ReseveObj);
         const Reserve = await genCollection("Reserves");
         const newReserve = await Reserve.insertOne(ReseveObj)
