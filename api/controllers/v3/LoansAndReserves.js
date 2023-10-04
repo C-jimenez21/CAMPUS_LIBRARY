@@ -138,7 +138,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
         console.log(field, value);
         if (field == "state") {
             let result = await coleccion.aggregate([
-                { $match: { state: value } },
+                { $match: { state: { $eq: value} } },
                 {
                     $lookup: {
                         from: "User",
@@ -175,7 +175,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: value } },
+                { $match: { user: {$eq: value} } },
                 {
                     $lookup: {
                         from: "User",
@@ -448,7 +448,7 @@ export const getDataLoanByDiferentParam = async (req, res) => {
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: value } },
+                { $match: { user: {$eq: value} } },
                 {
                     $lookup: {
                         from: "User",

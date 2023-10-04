@@ -10,14 +10,14 @@ const appReserves = Router();
 //LOANS
 appLoans.get('/', getDataLoanV1);
 appLoans.get('/:id', getDataLoanById);
-appReserves.get('/search', getDataLoanByDiferentParam);
-appReserves.get('/date', getDataLoanByDate);
+appLoans.post('/search', getDataLoanByDiferentParam);
+appLoans.get('/date', getDataLoanByDate);
 appLoans.post('/', validateToken, validateSchema(loanSchema), postLoan);
 appLoans.delete('/:id', deleteLoanById);
 
 //RESERVES
 appReserves.get('/', getDataReserveV1);
-appReserves.get('/search', getDataReserveByDiferentParam);
+appReserves.post('/search', getDataReserveByDiferentParam);
 appReserves.get('/date', getDataReserveByDate);
 appReserves.get('/:id', getDataReserveById);
 appReserves.post('/', validateToken, validateSchema(reserveSchema), postReserve);
