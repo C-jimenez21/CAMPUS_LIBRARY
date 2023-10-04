@@ -77,6 +77,7 @@ const logOut = () => {
                 setLoading(false);
                 return
             }
+            
             setIsAuthenticaded(true)
             setLoading(false)
             setUser(response.data)

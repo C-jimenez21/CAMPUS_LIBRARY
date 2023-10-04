@@ -12,7 +12,6 @@ export const profileReq = () => axios.get(`/verify`);
 
 //USER URL
 
-
 export const getProducts = () => axios.get(`/api/Products`)
 export const getProductsById = (id) => axios.get(`/api/Products/${id}`)
 
@@ -21,3 +20,5 @@ export const postReserves = (reserve) => axios.post(`/api/Reserves`, reserve)
 
 export const getLoansById = () => axios.get(`/api/Loans/${id}`)
 export const postLoans = (loan) => axios.post(`/api/Loans`, loan)
+
+
