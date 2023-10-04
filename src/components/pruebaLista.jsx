@@ -42,7 +42,7 @@ export default function PruebaLista() {
                     </div>
                     <div>
                         <button>
-                            <Link to={`/Product/${product._id}`}><ReadMoreIcon /></Link>
+                            <Link to={`/bokId/${product.serial}`}><ReadMoreIcon /></Link>
                         </button>
                     </div>
                     </li>
