@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
 
-    background-color: #04080f;
-    
-}
+.limitar-ancho {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }

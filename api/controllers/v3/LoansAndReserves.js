@@ -138,7 +138,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
         console.log(field, value);
         if (field == "state") {
             let result = await coleccion.aggregate([
-                { $match: { state: value } },
+                { $match: { state: { $eq: value} } },
                 {
                     $lookup: {
                         from: "User",
@@ -175,7 +175,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: value } },
+                { $match: { user: {$eq: value} } },
                 {
                     $lookup: {
                         from: "User",
@@ -221,8 +221,8 @@ export const getDataReserveByDiferentParam = async (req, res) => {
 export const postReserve = async (req, res) => {
     try {
         //Validar la informacion
-        const { user, product, reservedDate, state } = req.data
-
+        const {  product, reservedDate, state } = req.data
+        const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
         const isMatchA = await UserCol.findOne({ email: user });
@@ -241,6 +241,7 @@ export const postReserve = async (req, res) => {
             reservedDate: new Date(reservedDate),
             state
         }
+
         console.log(ReseveObj);
         const Reserve = await genCollection("Reserves");
         const newReserve = await Reserve.insertOne(ReseveObj)
@@ -447,7 +448,7 @@ export const getDataLoanByDiferentParam = async (req, res) => {
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: value } },
+                { $match: { user: {$eq: value} } },
                 {
                     $lookup: {
                         from: "User",
@@ -492,8 +493,9 @@ export const getDataLoanByDiferentParam = async (req, res) => {
 export const postLoan = async (req, res) => {
     try {
         //Validar la informacion
-        const { user, product, beguinDate, endDate, state= "pediente" } = req.data
+        const {  product, beguinDate, endDate, state= "pediente" } = req.data
 console.log(req.data);
+const {email:user} = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
         const isMatchA = await UserCol.findOne({ email: user });
