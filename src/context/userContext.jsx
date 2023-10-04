@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getProducts, getProductsById, getLoansById, getReservesById, postLoans, postReserves } from "../API/auth";
 import { useAuth } from "./authContext";
+import { Navigate } from "react-router-dom";
 const UserContext = createContext()
 
 export const useProducts = () => {
@@ -26,12 +27,15 @@ export function UserProvider({ children }) {
             console.log(res);
         } catch (error) {
             console.log(error);
+            Navigate("/Notfound")
+
         }
     }
 
     const postLoanUser = async (data) => {
         try {
             const res = await postLoans(data)
+            alert("Se registro con exito")        
             setProduct(res.data)
             console.log(res);
         } catch (errors) {
