@@ -1,7 +1,7 @@
 //user routers
 import { Router } from "express";
 import { validateSchema } from "../middlewares/validatorSchema.js";
-import { getDataLoanV1, getDataReserveV1, getDataReserveById, getDataReserveByDate, getDataReserveByDiferentParam, postReserve, deleteReserveById, getDataLoanById, getDataLoanByDiferentParam, getDataLoanByDate, postLoan, deleteLoanById} from "../controllers/v3/LoansAndReserves.js";
+import { getDataLoanV1, getDataReserveV1, getDataReserveById, getDataReserveByDate, getDataReserveByDiferentParam, postReserve, deleteReserveById, getDataLoanById, getDataLoanByDiferentParam, getDataLoanByDate, postLoan, deleteLoanById, updateLoan} from "../controllers/v3/LoansAndReserves.js";
 import { reserveSchema, loanSchema } from "../validation/loanReservesSchemas.js";
 import { validateToken} from "../middlewares/token.js";
 const appLoans = Router();
@@ -9,6 +9,7 @@ const appReserves = Router();
 
 //LOANS
 appLoans.get('/', getDataLoanV1);
+appLoans.put('/requestEmployee', updateLoan);
 appLoans.get('/:id', getDataLoanById);
 appLoans.post('/search', getDataLoanByDiferentParam);
 appLoans.get('/date', getDataLoanByDate);
