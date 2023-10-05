@@ -28,7 +28,7 @@ export default function BookList() {
 
     return (
         <>
-            <Container maxWidth="xl" sx={{ mt: 5 }}>
+            <Container maxWidth="xl" sx={{ mt: 0 }}>
                 {isLoad ? (<Box sx={{
                     display: 'flex',
                     justifyContent: 'center', // Centrar horizontalmente

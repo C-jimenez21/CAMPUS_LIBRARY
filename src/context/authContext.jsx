@@ -49,6 +49,7 @@ export const AuthProvider = ({children})=>{
     const empleadoRegister = async(user) => {
         try {
             const res =  await registerReq(user);
+            alert(res.data.message);
         } catch (errors) {
             console.log(errors);
             setErrors(errors.response.data.error);

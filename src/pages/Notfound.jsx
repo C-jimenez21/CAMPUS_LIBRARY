@@ -20,7 +20,9 @@ export default function Notfound() {
 
                                     <p>the page you are looking for not avaible!</p>
 
-                                    <Link to="/products" className="link_404">Go to Home</Link>
+                                    <Link to="/products"  className="link_404">
+                                        Go to Home
+                                    </Link>
                                 </div>
                             </div>
                         </div>
