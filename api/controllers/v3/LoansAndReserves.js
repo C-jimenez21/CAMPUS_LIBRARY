@@ -138,7 +138,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
         console.log(field, value);
         if (field == "state") {
             let result = await coleccion.aggregate([
-                { $match: { state: { $eq: value} } },
+                { $match: { state: { $eq: value } } },
                 {
                     $lookup: {
                         from: "User",
@@ -175,7 +175,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: {$eq: value} } },
+                { $match: { user: { $eq: value } } },
                 {
                     $lookup: {
                         from: "User",
@@ -221,7 +221,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
 export const postReserve = async (req, res) => {
     try {
         //Validar la informacion
-        const {  product, reservedDate, state } = req.data
+        const { product, reservedDate, state } = req.data
         const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
@@ -305,7 +305,7 @@ export const getDataLoanV1 = async (req, res) => {
                 "Product._id": 0
             }
         },
-        { $sort:{"beguinDate": -1}}
+        { $sort: { "beguinDate": -1 } }
     ]).toArray();
     (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Loans not found' })
     return result
@@ -317,7 +317,7 @@ export const getDataLoanById = async (req, res) => {
         const coleccion = await genCollection("Loans");
         let result = await coleccion.aggregate([
             { $match: { _id: new ObjectId(req.params.id) } },
-            
+
             {
                 $lookup: {
                     from: "User",
@@ -395,7 +395,7 @@ export const getDataLoanByDate = async (req, res) => {
                     "Product._id": 0
                 }
             },
-            { $sort:{"beguinDate": -1}}
+            { $sort: { "beguinDate": 1 } }
         ]).toArray();
         (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Loan not found' })
         return result;
@@ -443,12 +443,12 @@ export const getDataLoanByDiferentParam = async (req, res) => {
                         "Product._id": 0
                     }
                 },
-                { $sort:{"beguinDate": -1}}]).toArray();
+                { $sort: { "beguinDate": 1 } }]).toArray();
             (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Loan not found' })
             return result;
         } else if (field == "user") {
             let result = await coleccion.aggregate([
-                { $match: { user: {$eq: value} } },
+                { $match: { user: { $eq: value } } },
                 {
                     $lookup: {
                         from: "User",
@@ -479,7 +479,7 @@ export const getDataLoanByDiferentParam = async (req, res) => {
                         "Product._id": 0
                     }
                 },
-                { $sort:{"beguinDate": -1}}]).toArray();
+                { $sort: { "beguinDate": 1 } }]).toArray();
             (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Loan not found' })
             return result
         }
@@ -493,9 +493,9 @@ export const getDataLoanByDiferentParam = async (req, res) => {
 export const postLoan = async (req, res) => {
     try {
         //Validar la informacion
-        const {  product, beguinDate, endDate, state= "pediente" } = req.data
-console.log(req.data);
-const {email:user} = req.user
+        const { product, beguinDate, endDate, state = "pendiente" } = req.data
+        console.log(req.data);
+        const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
         const UserCol = await genCollection("User");
         const isMatchA = await UserCol.findOne({ email: user });
@@ -513,7 +513,7 @@ const {email:user} = req.user
             Product: product,
             beguinDate: new Date(beguinDate),
             endDate: new Date(endDate),
-            state 
+            state
         }
         console.log(ReseveObj);
         const Loan = await genCollection("Loans");
@@ -528,6 +528,63 @@ const {email:user} = req.user
     }
 }
 
+export const verifyStock = async (id) => {
+    try {
+        let producto = await genCollection("Product")
+        let thereAreStock = producto.findOne({ serial: id })
+        if (thereAreStock.stock <= 0) return false
+        else return true
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateLoan = async (req, res) => {
+    try {
+        const { IDproducto, identificador, response } = req.body
+        if (response === "aprobada") {
+            if (!verifyStock(IDproducto)) return res.status(404).send({ error: ["There are no Stock for this product"] })
+            let Prestamo = await genCollection("Loans")
+            let setState = Prestamo.updateOne(
+                {
+                    _id: new ObjectId(identificador),
+                },
+                {
+                    $set: { state: "aprobada" },
+                }
+            )
+            let producto = await genCollection("Product")
+            let setStock = producto.updateOne(
+                {
+                    serial: IDproducto,
+                    stock: { $gt: 0 }
+                },
+                {
+                    $inc: { stock: -1 }
+                }
+            );
+            return res.status(204).send({ message: "Loan Aproved successfully" })
+        }
+        else {
+            let producto = await genCollection("Loans")
+            let result = producto.updateOne(
+                {
+                    _id: new ObjectId(identificador),
+                },
+                {
+                    $set: { state: "rechazada" }
+                }
+            );
+            return res.status(204).send({ message: "Loan rejected successfully" })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ error:["Something went wrong"]})
+    }
+}
+
+
+
 export const deleteLoanById = async (req, res) => {
     try {
         const coleccion = await genCollection("Loans");
@@ -540,3 +597,6 @@ export const deleteLoanById = async (req, res) => {
         console.log(error);
     }
 }
+
+
+

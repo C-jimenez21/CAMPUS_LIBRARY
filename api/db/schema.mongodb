@@ -1,56 +1,129 @@
 //Schemas database
-use("Campus_library");
-db.createCollection("User",{
-    capped:true,
-    size:3000,
-    max:100,
-    validator:{
-        $jsonSchema:{
-            bsonType: "object",
-            additionalProperties: false,
-            required : ['_id','email','username', 'password','rol' ],
-            properties:{
-                _id:{
-                    bsonType: 'objectId',
-                    description : "El _id es un parametro obligatorio y debe ser un objectid"
-                },
-                name:{  
-                    bsonType: 'string',
-                    description : "El name es un parametro obligatorio y debe ser un string",
-                    minLength: 1
-                },
-                lastname:{  
-                    bsonType: 'string',
-                    description : "El lastname es un parametro obligatorio y debe ser un string",
-                    minLength: 1
-                }, 
-                username:{  
-                    bsonType: 'string',
-                    description : "El username es un parametro obligatorio y debe ser un string",
-                    minLength: 1
-                },
-                email:{  
-                    bsonType: 'string',
-                    description : "El email es un parametro obligatorio y debe ser un string",
-                    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-                },
-                password:{  
-                    bsonType: 'string',
-                    description : "El password es un parametro obligatorio y debe ser un string",
-                    minLength: 6
-                },
-                phone:{  
-                    bsonType: 'int',
-                    description : "El phone es un parametro obligatorio y debe ser un int"
-                },
-                rol:{  
-                    bsonType: 'string',
-                    enum: ["Usuario", "Empleado", "Admin"],
-                    description : "El rol es un parametro obligatorio y debe ser un string"
-                }
-        }
-    }
-}
-}); 
 
-db.User.createIndex( { "email": 1, "username": 1 }, { unique: true } )
+
+//check
+use("Campus_library2");
+db.createCollection("Product", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: true,
+            required: [
+                "name",
+                "serial",
+                "stock",
+                "pages",
+            ],
+            properties: {
+                name: {
+                    bsonType: "string",
+                    description: "El nombre es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                author: {
+                    bsonType: "string",
+                    description: "El autor es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                company: {
+                    bsonType: "string",
+                    description: "La compañía es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                serial: {
+                    bsonType: "string",
+                    description: "El número de serie es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                category: {
+                    bsonType: "string",
+                    description: "La categoría es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                description: {
+                    bsonType: "string",
+                    description: "La descripción es un parámetro obligatorio y debe ser una cadena de texto",
+                },
+                date_created: {
+                    bsonType: "date",
+                    description: "La fecha de creación es un parámetro obligatorio y debe ser una fecha en formato ISODate",
+                },
+                stock: {
+                    bsonType: "int",
+                    description: "El stock es un parámetro obligatorio y debe ser un número entero",
+                },
+                image: {
+                    bsonType: "string",
+                    description: "La imagen es un parámetro obligatorio y debe ser una cadena de texto que representa una URL de imagen",
+                },
+                qualify: {
+                    bsonType: "double",
+                    description: "La calificación es un parámetro obligatorio y debe ser un número de punto flotante",
+                },
+                pages: {
+                    bsonType: "int",
+                    description: "El número de páginas es un parámetro obligatorio y debe ser un número entero",
+                },
+            },
+        },
+    },
+});
+
+use("Campus_library2");
+db.createCollection("Reserves", {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        additionalProperties: true,
+        required: ["user", "Product", "reservedDate", "state"],
+        properties: {
+          user: {
+            bsonType: "string",
+            description: "El usuario es un parámetro obligatorio y debe ser una cadena de texto",
+          },
+          Product: {
+            bsonType: "string",
+            description: "El producto es un parámetro obligatorio y debe ser una cadena de texto",
+          },
+          reservedDate: {
+            bsonType: "date",
+            description: "La fecha de reserva es un parámetro obligatorio y debe ser una fecha en formato ISODate",
+          },
+          state: {
+            bsonType: "string",
+            description: "El estado es un parámetro obligatorio y debe ser una cadena de texto con uno de los siguientes valores: 'pendiente', 'aprobada' o 'cancelada'",
+          },
+        },
+      },
+    },
+  });
+  
+
+use("Campus_library2");
+db.createCollection("Loans", {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        additionalProperties: true,
+        required: ["user", "Product", "beguinDate", "endDate", "state"],
+        properties: {
+          user: {
+            bsonType: "string",
+            description: "El usuario es un parámetro obligatorio y debe ser una cadena de texto",
+          },
+          Product: {
+            bsonType: "string",
+            description: "El producto es un parámetro obligatorio y debe ser una cadena de texto",
+          },
+          beguinDate: {
+            bsonType: "date",
+            description: "La fecha de inicio es un parámetro obligatorio y debe ser una fecha en formato ISODate",
+          },
+          endDate: {
+            bsonType: "date",
+            description: "La fecha de finalización es un parámetro obligatorio y debe ser una fecha en formato ISODate",
+          },
+          state: {
+            bsonType: "string",
+            description: "El estado es un parámetro obligatorio y debe ser una cadena de texto con uno de los siguientes valores: 'activo', 'devuelto' o 'vencido'",
+          },
+        },
+      },
+    },
+  });
+  

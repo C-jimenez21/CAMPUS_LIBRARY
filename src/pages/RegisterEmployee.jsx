@@ -18,25 +18,21 @@ import { useAuth } from '../context/authContext';
 
 import { useNavigate, Link } from 'react-router-dom';
 
-export default function SignUp() {
+export default function RegisterEmployee() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { signUpRegister, isAuthenticated, errors: registerErrors } = useAuth()
+  const { empleadoRegister, isAuthenticated, errors: registerErrors } = useAuth()
 
   const Navigate = useNavigate();
 
   const handleSubmitMUI = handleSubmit(async (values) => {
     try {
-      let dataUser = { ...values, rol: "Usuario" }
+      let dataUser = { ...values, rol: "Empleado" }
       console.log(dataUser);
-      signUpRegister(dataUser);
+      empleadoRegister(dataUser);
     } catch (error) {
       console.log(error);
     }
   })
-
-  useEffect(() => {
-    if (isAuthenticated) Navigate('/products')
-  }, [isAuthenticated])
 
   return (
     <>
@@ -54,7 +50,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h4">
-            Register
+            Registrar Empleado
           </Typography>
           <Stack sx={{ width: '100%', mt: 6 }} spacing={1}>
             {
@@ -160,13 +156,13 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Registrar
             </Button>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">
-                  Already have an account? Sign in
+                  Volver
                 </Link>
               </Grid>
             </Grid>

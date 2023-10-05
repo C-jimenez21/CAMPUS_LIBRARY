@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { getReservesByDiferentParam } from '../API/auth'
 import { useAuth } from '../context/authContext'
 import BasicTable from '../components/TableReserves'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
 
-export default function LoansByUser() {
+export default function ReservesByUser() {
     const [reserve, setReserve] = useState([])
+    const [isLoad, setLoad] = useState(true)
 
     const { user } = useAuth()
     console.log(reserve);
@@ -16,23 +18,33 @@ export default function LoansByUser() {
             console.log(body);
             const res = await getReservesByDiferentParam(body)
             setReserve(res.data)
-
+            setLoad(false)
         } catch (error) {
             console.log(error);
+            setLoad(false);
+
         }
     }
 
     useEffect(() => {
         BringData()
     }, [])
-
-
-
+    
     return (
-
         <>
             <Container maxWidth="xl" sx={{ mt: 5 }}>
-                <BasicTable data={reserve} loan={true}/>
+            {isLoad ? (<Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center', // Centrar horizontalmente
+                    alignItems: 'center',     // Centrar verticalmente
+                    height: '70vh'
+                }}>
+                    <CircularProgress />
+                </Box>
+                ) : (
+                    <BasicTable data={reserve} loan={false} />
+                )
+                }
             </Container>
         </>
 

@@ -11,17 +11,21 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import { useAuth } from '../context/authContext';
 import { Link } from 'react-router-dom';
 
-export default function NavBarUser() {
-    const pages = [{ 'name': "Products", 'link': "/products" }, { 'name': "Loans", 'link': "/tailwind" }, { 'name': "Reserves", 'link': "/reserves" }];
+export default function NavBarAdmin() {
+    
+    //const pages = [{ 'name': "Products", 'link': "/products" }, { 'name': "Loans", 'link': "/loans" }, { 'name': "Reserves", 'link': "/reserves" }];
+    //const pages = [{ 'name': "Añadir Libros", 'link': "/addBooks" }, { 'name': "Solicitudes", 'link': "/requests" }, { 'name': "Libros", 'link': "/books" }];
+    const pages = [{ 'name': "Añadir Empleados", 'link': "/addEmployee" }, { 'name': "Listar Empleados", 'link': "/listEmployee" }, { 'name': "Listar Usuarios", 'link': "/listUsers" }, { 'name': "Estadisticas", 'link': "/stadistics" } ];
 
-    const { logOut } = useAuth()
 
+
+pages
+
+    const { logOut, user } = useAuth()
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -43,7 +47,7 @@ export default function NavBarUser() {
 
     return (
         <React.Fragment>
-            <AppBar position="static">
+            <AppBar position="sticky" color='default'>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Typography
@@ -133,8 +137,7 @@ export default function NavBarUser() {
                                 <Button
                                         key={page.name}
                                         onClick={handleCloseNavMenu}
-
-                                        sx={{ my: 2, color: 'white', display: 'block' }}
+                                        sx={{ my: 2, mr: 8, color: 'black', display: 'block' }}
                                     >
                                 <Link to={page.link}>
                                         {page.name}
@@ -146,7 +149,7 @@ export default function NavBarUser() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ pl: 2 }}>
-                                    <p>Cristian Jimenez</p>
+                               
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title="Open settings">
@@ -175,7 +178,7 @@ export default function NavBarUser() {
                                     <Typography textAlign="center"><Link to={"/profile"}>Profile</Link></Typography>
                                 </MenuItem>
 
-                                <MenuItem onClick={() => console.log()}>
+                                <MenuItem onClick={() => logOut()}>
                                     <Typography textAlign="center"><Link to={"/login"}>Log Out</Link></Typography>
                                 </MenuItem>
 

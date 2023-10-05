@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { getReservesByDiferentParam } from '../API/auth'
+import { getLoansByDiferentParam } from '../API/auth'
 import { useAuth } from '../context/authContext'
 import BasicTable from '../components/TableReserves'
 import { Container } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
+import { Box } from "@mui/material";
+
 
 export default function LoansByUser() {
-    const [reserve, setReserve] = useState([])
+    const [LoansData, setLoans] = useState([])
+    const [isLoad, setLoad] = useState(true)
 
     const { user } = useAuth()
-    console.log(reserve);
+    console.log(LoansData);
     const BringData = async () => {
         try {
             console.log(user);
             const body = { "field": "user", "value": user.email }
             console.log(body);
-            const res = await getReservesByDiferentParam(body)
-            setReserve(res.data)
+            const res = await getLoansByDiferentParam(body)
+            setLoans(res.data)
+            setLoad(false)
 
         } catch (error) {
             console.log(error);
+            setLoad(false);
+
         }
     }
 
@@ -32,7 +39,18 @@ export default function LoansByUser() {
 
         <>
             <Container maxWidth="xl" sx={{ mt: 5 }}>
-                <BasicTable data={reserve} loan={false}/>
+                {isLoad ? (<Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center', // Centrar horizontalmente
+                    alignItems: 'center',     // Centrar verticalmente
+                    height: '70vh'
+                }}>
+                    <CircularProgress />
+                </Box>
+                ) : (
+                    <BasicTable data={LoansData} loan={true} />
+                )
+                }
             </Container>
         </>
 

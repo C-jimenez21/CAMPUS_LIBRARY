@@ -16,10 +16,6 @@ import { useAuth } from '../context/authContext';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { signInLogin, isAuthenticated, logOut, user, errors: registerErrors } = useAuth()
@@ -35,13 +31,13 @@ export default function SignIn() {
     if (isAuthenticated)
       switch (user.rol) {
         case "Usuario":
-          Navigate('/profile');
+          Navigate('/products');
           break;
         case "Empleado":
-          Navigate('/profile2');
+          Navigate('/requests');
           break;
         case "Admin":
-          Navigate('/profile3');
+          Navigate('/listUsers');
           break
         default:
           logOut();
@@ -77,8 +73,6 @@ export default function SignIn() {
           }
         </Stack>
 
-
-
         <Box component="form" noValidate onSubmit={handleSubmitMUI} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
 
@@ -95,7 +89,6 @@ export default function SignIn() {
               />
               {
                 errors.email && <Alert severity="warning">email is required</Alert>
-
               }
             </Grid>
 

@@ -3,7 +3,7 @@ import axios from './axios.js';
 //const API = `http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/`;
 
 
-export const registerReq = (user) => axios.post(`/register`);
+export const registerReq = (user) => axios.post(`/register`, user);
 
 export const loginReq = (user) => axios.post(`/login`, user);
 
@@ -27,4 +27,10 @@ export const postReserves = (reserve) => axios.post(`/api/Reserves`, reserve)
 export const getLoansById = () => axios.get(`/api/Loans/${id}`)
 export const postLoans = (loan) => axios.post(`/api/Loans`, loan)
 
+//Employees URL
+export const postProduct = (book) => axios.post(`api/Products`, book)
+export const requestLoans = (book) => axios.put(`api/Loans/requestEmployee`, book)
 
+export const getAllUsers = () => axios.get(`api/User/`)
+export const getAllEmployee = () => axios.get(`api/User/Empleado`)
+export const deleteUser = (data) => axios.delete(`api/User/${data}`)
