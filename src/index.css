@@ -9,3 +9,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  .logoHome{
+    border-radius: 50px;
+    width: 50%;
+    object-fit: scale-down;
+  }
