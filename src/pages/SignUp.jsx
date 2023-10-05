@@ -17,8 +17,6 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/authContext';
 
 import { useNavigate, Link } from 'react-router-dom';
-// TODO remove, this demo shouldn't need to reset the theme.
-
 
 export default function SignUp() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -27,13 +25,17 @@ export default function SignUp() {
   const Navigate = useNavigate();
 
   const handleSubmitMUI = handleSubmit(async (values) => {
-    let dataUser = { ...values, rol: "Usuario" }
-    console.log(dataUser);
-    signUpRegister(dataUser);
+    try {
+      let dataUser = { ...values, rol: "Usuario" }
+      console.log(dataUser);
+      signUpRegister(dataUser);
+    } catch (error) {
+      console.log(error);
+    }
   })
 
   useEffect(() => {
-    if (isAuthenticated) Navigate('/profile')
+    if (isAuthenticated) Navigate('/products')
   }, [isAuthenticated])
 
   return (
@@ -63,8 +65,6 @@ export default function SignUp() {
               ))
             }
           </Stack>
-
-
 
           <Box component="form" noValidate onSubmit={handleSubmitMUI} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -106,7 +106,6 @@ export default function SignUp() {
                 />
                 {
                   errors.email && <Alert severity="warning">email is required</Alert>
-
                 }
               </Grid>
               <Grid item xs={8} >
@@ -152,7 +151,6 @@ export default function SignUp() {
                 />
                 {
                   errors.password && <Alert severity="warning">password is required</Alert>
-
                 }
               </Grid>
             </Grid>
@@ -174,11 +172,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-
       </Container>
-
-
-
     </>
   );
 }
