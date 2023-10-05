@@ -543,7 +543,7 @@ export const updateLoan = async (req, res) => {
     try {
         const { IDproducto, identificador, response } = req.body
         if (response === "aprobada") {
-            if (!verifyStock(IDproducto)) return res.status(404).send({ message: "There are no Stock for this product" })
+            if (!verifyStock(IDproducto)) return res.status(404).send({ error: ["There are no Stock for this product"] })
             let Prestamo = await genCollection("Loans")
             let setState = Prestamo.updateOne(
                 {
@@ -579,7 +579,7 @@ export const updateLoan = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ message:"Something went wrong"})
+        return res.status(500).send({ error:["Something went wrong"]})
     }
 }
 

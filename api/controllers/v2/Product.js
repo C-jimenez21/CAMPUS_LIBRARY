@@ -36,14 +36,14 @@ export const getDataProductById = async (req, res) => {
       //Revisar si este usuario ya se encuentra en la base de datos
       const Product = await genCollection("Product")
       const isMatch = await Product.findOne({serial: req.data.serial})
-      if(isMatch) return res.status(404).json({message: 'This product is already registered'})
+      if(isMatch) return res.status(404).json({error: ['This product is already registered']})
       //Realizar el registro en la base de datos
       const newProduct = await Product.insertOne(req.data)
       let result
       (newProduct.acknowledged) ? result = res.status(201).json({message: 'Successfully created product'}) : result = res.status(404).json({message: 'Product could not be registered'})
       return result;
     } catch (error) {
-      res.status(404).json({ message: 'Something went wrong' })
+      res.status(404).json({ error: ['Something went wrong'] })
       console.log(error);
     }
   }
@@ -56,7 +56,7 @@ export const getDataProductById = async (req, res) => {
       (result.acknowledged && result.deletedCount !== 0) ? result = res.send({message: 'Product successfully removed'}).status(204) : result = res.status(404).json({ message: 'Product not found' })
       return result;
   } catch (error) {
-      res.status(404).json({ message: 'Something went wrong' })
+      res.status(404).json({ error: ['Something went wrong'] })
       console.log(error);
     }
 }

@@ -8,7 +8,18 @@ export const getDataUserV1 = async (req, res) => {
   try {
     console.log(req.user);
     const coleccion = await genCollection("User");
-    let result = await coleccion.find().toArray();
+    let result = await coleccion.find({"rol": "Usuario"}).toArray();
+    res.send(result).status(200)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getDataEmpleadoV1 = async (req, res) => {
+  try {
+    console.log(req.user);
+    const coleccion = await genCollection("User");
+    let result = await coleccion.find({"rol": "Empleado"}).toArray();
     res.send(result).status(200)
   } catch (error) {
     console.log(error);
@@ -103,4 +114,17 @@ export const getDataLoanV1 = async (req, res) => {
     }
   ]).toArray();
   res.send(result).status(200)
+}
+
+export const deleteUserById = async (req, res) => {
+  try {
+    const coleccion = await genCollection("User");
+    let result = await coleccion.deleteOne({email:req.params.id})
+    console.log(result);
+    (result.acknowledged && result.deletedCount !== 0) ? result = res.send({message: 'Product successfully removed'}).status(204) : result = res.status(404).json({ message: 'Product not found' })
+    return result;
+} catch (error) {
+    res.status(404).json({ message: 'Something went wrong' })
+    console.log(error);
+  }
 }
