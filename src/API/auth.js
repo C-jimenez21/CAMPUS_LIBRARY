@@ -30,3 +30,7 @@ export const postLoans = (loan) => axios.post(`/api/Loans`, loan)
 //Employees URL
 export const postProduct = (book) => axios.post(`api/Products`, book)
 export const requestLoans = (book) => axios.put(`api/Loans/requestEmployee`, book)
+
+export const getAllUsers = () => axios.get(`api/User/`)
+export const getAllEmployee = () => axios.get(`api/User/Empleado`)
+export const deleteUser = (data) => axios.delete(`api/User/${data}`)
