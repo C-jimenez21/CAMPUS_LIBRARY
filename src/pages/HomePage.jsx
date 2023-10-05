@@ -32,34 +32,6 @@ export default function HomePage() {
           </Toolbar>
         </AppBar>
       </Box>
-{/*
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center', // Centrar horizontalmente
-          alignItems: 'center',     // Centrar verticalmente
-          height: '100vh',
-          width: '100%'
-        }}>
-     
-        </Box>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center', // Centrar horizontalmente
-        alignItems: 'center',     // Centrar verticalmente
-        height: '100vh'
-      }}>
-        <DynamicBooks />
-      </Box>
-   
-<Box sx={{
-        display: 'flex',
-        justifyContent: 'center', // Centrar horizontalmente
-        alignItems: 'center',     // Centrar verticalmente
-        height: '100vh'
-      }}>
-        <DynamicTable />
-      </Box>
-       */}
     </>
   )
 }

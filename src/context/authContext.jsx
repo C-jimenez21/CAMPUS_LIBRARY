@@ -25,8 +25,9 @@ export const AuthProvider = ({children})=>{
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticaded(true)
-            setLoading(false)
+            //setLoading(false)
         } catch (errors) {
+            console.log(errors);
             console.log(errors.response.data.error);
             setErrors(errors.response.data.error);
         }
@@ -38,12 +39,24 @@ export const AuthProvider = ({children})=>{
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticaded(true)
-            setLoading(false)
+            //setLoading(false)
         } catch (errors) {
             console.log(errors.response.data.error);
             setErrors(errors.response.data.error);
         }
     }
+
+    const empleadoRegister = async(user) => {
+        try {
+            const res =  await registerReq(user);
+        } catch (errors) {
+            console.log(errors);
+            setErrors(errors.response.data.error);
+        }
+    }
+
+
+
 
 const logOut = () => {
     Cookies.remove("token");
@@ -72,17 +85,16 @@ const logOut = () => {
     }
 
         try {
-           const response = await profileReq()
-           
+           const response = await profileReq() 
             if(!response.data){
                 setIsAuthenticaded(false);
                 setLoading(false);
                 return
             }
             
+            setUser(response.data)
             setIsAuthenticaded(true)
             setLoading(false)
-            setUser(response.data)
             //if(!response.data) setIsAuthenticaded(false)
         } catch (error) {
             console.log({"erorr de axiois":error});
@@ -104,7 +116,8 @@ const logOut = () => {
             loading,
             logOut,
             setErrors,
-            signInLogin
+            signInLogin,
+            empleadoRegister
         }}>
             {children}
         </AuthContext.Provider>
