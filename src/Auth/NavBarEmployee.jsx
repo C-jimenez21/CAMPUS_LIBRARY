@@ -23,7 +23,6 @@ export default function NavBarEmployee() {
 
 
 
-pages
 
     const { logOut, user } = useAuth()
 
