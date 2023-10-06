@@ -266,8 +266,8 @@ export const getDataReserveByDiferentParam = async (req, res) => {
 export const postReserve = async (req, res) => {
     try {
         //Validar la informacion
-        const { product, reservedDate, state = "pendiente" } = req.data
-       const { email: user } = req.user
+        const { user, product, reservedDate, state = "pendiente" } = req.data
+       // const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
        
         const ProductCol = db.collection("Product");

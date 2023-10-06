@@ -50,15 +50,15 @@ export default function AddBook() {
 
     const categorias = [
         "Self-help",
-        "Science fiction comedy",
+        "Science fiction", 
+        "comedy",
         "Romance",
         "Business",
         "Dystopian",
         "Literatura infantil",
         "Children's fiction",
         "Fantasy",
-        "Fiction",
-        "Coming-of-age fiction"
+        "Fiction"
     ]
 
 
@@ -152,11 +152,15 @@ export default function AddBook() {
                                         required
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        label="Age"
+                                        label="Category"
                                         {...register('category', { required: true })}>
-                                        {categorias.map((name) => (
-                                            <MenuItem value={name}>{name}</MenuItem>
-                                        ))}
+                                            <MenuItem value="Fantasy" selected>Fantasy</MenuItem>
+
+                                        {
+                                        categorias.map((name, index) => (
+                                            <MenuItem key={index} value={name}>{name}</MenuItem>
+                                        ))
+                                        }
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -253,7 +257,7 @@ export default function AddBook() {
 
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link to="/admin" variant="body2">
+                                <Link to="/requests" variant="body2">
                                     Volver a la pagina de inicio
                                 </Link>
                             </Grid>

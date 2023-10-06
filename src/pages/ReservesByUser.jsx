@@ -19,6 +19,7 @@ export default function ReservesByUser() {
             const res = await getReservesByDiferentParam(body)
             setReserve(res.data)
             setLoad(false)
+            console.log({"respuesta pagina": res});
         } catch (error) {
             console.log(error);
             setLoad(false);
@@ -28,6 +29,7 @@ export default function ReservesByUser() {
 
     useEffect(() => {
         BringData()
+        console.log("cuantas veces esta llamando a la aapi...");
     }, [])
     
     return (

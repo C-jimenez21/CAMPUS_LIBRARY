@@ -46,9 +46,9 @@ export default function BasicTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map((row) => (
+                            {data.map((row, index) => (
                                 <TableRow
-                                    key={row._id}
+                                    key={index}
                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                 >
                                     <TableCell align="center" component="th" scope="row">
@@ -138,9 +138,9 @@ export default function BasicTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map((row) => (
+                            {data.map((row, index) => (
                                 <TableRow
-                                    key={row._id}
+                                    key={index}
                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                 >
                                     <TableCell align="center" component="th" scope="row">

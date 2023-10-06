@@ -3,11 +3,13 @@ import { ObjectId } from "mongodb";
 import genCollection from "../../helpers/fastConnect.js"
 //import { con } from "../../config/atlas.js";
 //let db = await con()
+import {connection} from "../../config/atlas.js"
 
+let db = await connection()
 export const getDataUserV1 = async (req, res) => {
   try {
+    const coleccion = db.collection("User");
     console.log(req.user);
-    const coleccion = await genCollection("User");
     let result = await coleccion.find({"rol": "Usuario"}).toArray();
     res.send(result).status(200)
   } catch (error) {
