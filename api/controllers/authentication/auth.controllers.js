@@ -8,13 +8,13 @@ import { generateToken } from '../../middlewares/token.js';
 export const register = async (req, res) => {
     try {
         const { name, lastname, username, email, phone, password, rol } = req.data;
-        console.log(req.data);
+        //console.log(req.data);
         let colecction = await genCollection('User')
         let userExists = await colecction.findOne({ "email": email })
-        console.log(userExists);
+        //console.log(userExists);
         if(userExists) {return res.status(404).json({error:["This email is already register"]});}
         const passwordHash = await bcrypt.hash(password, 10)
-        console.log(passwordHash);
+        //console.log(passwordHash);
         const newUser = {
             name,
             lastname,
@@ -24,7 +24,7 @@ export const register = async (req, res) => {
             phone,
             rol
         }
-        console.log({ "user obj": newUser });
+        //console.log({ "user obj": newUser });
         const userSaved = await colecction.insertOne(newUser);
         if(!userSaved.acknowledged){return res.status(404).send({ error: [' an error occurred with user creation'] }) }
         const token = await generateToken({ email: newUser.email })

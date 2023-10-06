@@ -7,6 +7,7 @@ import { Grid, Container, Box, Button, Stack, Alert } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useAuth } from '../context/authContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const style = {
     position: 'absolute',
@@ -22,7 +23,7 @@ const style = {
 };
 
 export default function ProductPage() {
-
+    const [ isLoad, setLoading] = useState(true)
     const { getProductID, product, postLoanUser, errors: ReserveAndLoanError, postReserveUser } = useProducts()
     const { user } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -55,13 +56,13 @@ export default function ProductPage() {
         try {
             const { reservedDate } = values
             const formatData = { "reservedDate": reservedDate, "user": user.email, "product": product.serial, "state": "pendiente" }
+            console.log({ "values form": formatData });
             const res = await postReserveUser(formatData)
-            console.log({ "values form": formatData, "response": res });
             Navigate(`/reserves`)
         } catch (error) {
             console.log(error);
-            alert("Ocurrio un error")
-            Navigate("/Notfound")
+            alert(error)
+            //Navigate("/Notfound")
         }
     })
 
@@ -77,6 +78,7 @@ export default function ProductPage() {
     useEffect(() => {
         if (params.id) {
             bringData()
+            setLoading(false)
         }
     }, [])
     return (
@@ -189,7 +191,16 @@ export default function ProductPage() {
                     </Box>
                 </Modal>
             </div>
-
+            {isLoad ? (<Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center', // Centrar horizontalmente
+                    alignItems: 'center',     // Centrar verticalmente
+                    height: '70vh'
+                }}>
+                    <CircularProgress />
+                </Box>
+                ) : (
+                   
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'center', // Centrar horizontalmente
@@ -197,7 +208,7 @@ export default function ProductPage() {
                 marginBlock: '50px'
             }}>
                 <Container maxWidth="md">
-                    <Grid spacing={0} >
+                    <Grid container spacing={0} >
 
                         <Grid item xs={12} key={product.id} height="auto">
                             <div className="flex flex-col items-center bg-white border border-black-200 rounded-lg shadow md:flex-row md:max hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -227,6 +238,8 @@ export default function ProductPage() {
                     </Grid>
                 </Container>
             </Box>
+                )
+                }
         </>
     )
 }

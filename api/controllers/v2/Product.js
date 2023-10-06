@@ -1,9 +1,11 @@
 //functions v2
 import genCollection from "../../helpers/fastConnect.js";
 import {connection} from "../../config/atlas.js"
+let db = await connection()
+
 export const getDataProductV1 = async (req, res) => {
     try {
-      const coleccion = await genCollection("Product");
+      const coleccion = db.collection("Product");
       let result = await coleccion.find().toArray();
       (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Product not found' })
         return result;
@@ -16,7 +18,6 @@ export const getDataProductV1 = async (req, res) => {
   
 export const getDataProductById = async (req, res) => {
   try {
-    let db = await connection()
     let coleccion = db.collection('Product')
     //const coleccion = await genCollection("Product");
     let result = await coleccion.find({serial:req.params.id}).toArray();
@@ -34,7 +35,7 @@ export const getDataProductById = async (req, res) => {
       //const { name, author, company, serial, category, description,   } = req.body
   
       //Revisar si este usuario ya se encuentra en la base de datos
-      const Product = await genCollection("Product")
+      const Product = db.collection("Product")
       const isMatch = await Product.findOne({serial: req.data.serial})
       if(isMatch) return res.status(404).json({error: ['This product is already registered']})
       //Realizar el registro en la base de datos
@@ -50,7 +51,7 @@ export const getDataProductById = async (req, res) => {
   
   export const deleteProductById = async (req, res) => {
     try {
-      const coleccion = await genCollection("Product");
+      const coleccion = db.collection("Product");
       let result = await coleccion.deleteOne({serial:req.params.id})
       console.log(result);
       (result.acknowledged && result.deletedCount !== 0) ? result = res.send({message: 'Product successfully removed'}).status(204) : result = res.status(404).json({ message: 'Product not found' })

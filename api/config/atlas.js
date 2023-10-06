@@ -4,7 +4,8 @@ import { loadEnv } from "vite";
 
 const env = loadEnv('development', process.cwd(), "ATLAS");
 
- console.log(`mongodb+srv://${env.ATLAS_USER}:${env.ATLAS_PASSWORD}@cluster0.qbqr4gp.mongodb.net/${env.ATLAS_DB}`);
+ 
+//console.log(`mongodb+srv://${env.ATLAS_USER}:${env.ATLAS_PASSWORD}@cluster0.qbqr4gp.mongodb.net/${env.ATLAS_DB}`);
 export async function connection(){
     try {
         const URI = `mongodb+srv://${env.ATLAS_USER}:${env.ATLAS_PASSWORD}@cluster0.qbqr4gp.mongodb.net/${env.ATLAS_DB}`;

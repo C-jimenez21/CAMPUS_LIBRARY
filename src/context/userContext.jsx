@@ -42,7 +42,7 @@ export function UserProvider({ children }) {
             console.log(res);
         } catch (errors) {
             console.log(errors.response.data.error);
-            setErrors(errors.response.data.error);
+            alert(errors.response.data.error);
         }
     }
 
@@ -54,7 +54,7 @@ export function UserProvider({ children }) {
             console.log(res);
         } catch (error) {
             console.log(errors.response.data.error);
-            setErrors(errors.response.data.error);
+            alert(errors.response.data.error);
         }
     }
 
@@ -81,7 +81,6 @@ export function UserProvider({ children }) {
             if (res.status === 204) {
                 console.log(peticiones.filter(peticiones => peticiones._id !== peticiones));
                 return setPeticiones(peticiones.filter(peticiones => peticiones._id !== id))
-
             }
         } catch (error) {
             console.log(error);
@@ -108,8 +107,8 @@ export function UserProvider({ children }) {
             const res = await deleteUser(id);
             console.log(res);
             if (res.status === 200) {
-                console.log(usuarios.filter(usuarios => usuarios._id !== id));
-                setUsuarios(usuarios.filter(usuarios => usuarios.id !== id))
+                console.log(usuarios.filter(usuarios => usuarios.email !== id));
+                setUsuarios(usuarios.filter(usuarios => usuarios.email !== id))
                 return  alert(`Se elimino ${usuarios.id} `)
             }
         } catch (error) {

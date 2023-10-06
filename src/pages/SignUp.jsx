@@ -20,7 +20,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 export default function SignUp() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { signUpRegister, isAuthenticated, errors: registerErrors } = useAuth()
+  const { user, signUpRegister, isAuthenticated, errors: registerErrors } = useAuth()
 
   const Navigate = useNavigate();
 
@@ -33,8 +33,8 @@ export default function SignUp() {
       console.log(error);
     }
   })
-
   useEffect(() => {
+    console.log(user);
     if (isAuthenticated) Navigate('/products')
   }, [isAuthenticated])
 

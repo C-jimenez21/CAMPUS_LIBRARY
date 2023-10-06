@@ -21,7 +21,7 @@ export const AuthProvider = ({children})=>{
     
  const signUpRegister = async(user) => {
         try {
-            const res =  await registerReq(user);
+            const res = await registerReq(user);
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticaded(true)

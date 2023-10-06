@@ -11,8 +11,9 @@ export default function LoansByUser() {
     const [LoansData, setLoans] = useState([])
     const [isLoad, setLoad] = useState(true)
 
-    const { user } = useAuth()
     console.log(LoansData);
+    
+    const { user } = useAuth()
     const BringData = async () => {
         try {
             console.log(user);
@@ -21,18 +22,18 @@ export default function LoansByUser() {
             const res = await getLoansByDiferentParam(body)
             setLoans(res.data)
             setLoad(false)
-
+            
         } catch (error) {
             console.log(error);
             setLoad(false);
-
+            
         }
     }
-
     useEffect(() => {
         BringData()
+        console.log("usse efect");
     }, [])
-
+    
 
 
     return (

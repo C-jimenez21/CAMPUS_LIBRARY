@@ -9,10 +9,6 @@ import { z } from "zod";
   }
  */
 export const reserveSchema = z.object({
-    user: z.string({
-        required_error: "user is required",
-        invalid_type_error: "user must be a string",
-    }),
     product: z.string({
         required_error: "product is required",
         invalid_type_error: "Product must be a string",
@@ -27,10 +23,6 @@ export const reserveSchema = z.object({
 
 
 export const loanSchema = z.object({
-    user: z.string({
-        required_error: "user is required",
-        invalid_type_error: "user must be a string",
-    }),
     product: z.string({
         required_error: "product is required",
         invalid_type_error: "Product must be a string",
