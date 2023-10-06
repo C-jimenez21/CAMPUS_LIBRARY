@@ -1,9 +1,14 @@
 import { ObjectId } from "mongodb";
 import genCollection from "../../helpers/fastConnect.js"
-//COLECCION RESERVES
+import { connection } from "../../config/atlas.js";
+let db = await connection()
 
+//COLECCION RESERVES
+console.log("Renderiza esto?");
 export const getDataReserveV1 = async (req, res) => {
-    const coleccion = await genCollection("Reserves");
+    //const coleccion = await genCollection("Reserves");
+    let coleccion = db.collection("Reserves")
+
     let result = await coleccion.aggregate([
         {
             $lookup: {
@@ -26,6 +31,14 @@ export const getDataReserveV1 = async (req, res) => {
         },
         {
             $unwind: "$Product"
+        }, {
+            $group: {
+                _id: "$_id",
+                User: { $first: "$User" },
+                Product: { $first: "$Product" },
+                reservedDate: { $first: "$reservedDate" },
+                state: { $first: "$state" }
+            }
         },
         {
             $project: {
@@ -43,7 +56,7 @@ export const getDataReserveV1 = async (req, res) => {
 
 export const getDataReserveById = async (req, res) => {
     try {
-        const coleccion = await genCollection("Reserves");
+        const coleccion = db.collection("Reserves");
         let result = await coleccion.aggregate([
             { $match: { _id: new ObjectId(req.params.id) } },
             {
@@ -67,6 +80,14 @@ export const getDataReserveById = async (req, res) => {
             },
             {
                 $unwind: "$Product"
+            }, {
+                $group: {
+                    _id: "$_id",
+                    User: { $first: "$User" },
+                    Product: { $first: "$Product" },
+                    reservedDate: { $first: "$reservedDate" },
+                    state: { $first: "$state" }
+                }
             },
             {
                 $project: {
@@ -114,6 +135,14 @@ export const getDataReserveByDate = async (req, res) => {
             },
             {
                 $unwind: "$Product"
+            }, {
+                $group: {
+                    _id: "$_id",
+                    User: { $first: "$User" },
+                    Product: { $first: "$Product" },
+                    reservedDate: { $first: "$reservedDate" },
+                    state: { $first: "$state" }
+                }
             },
             {
                 $project: {
@@ -134,7 +163,7 @@ export const getDataReserveByDate = async (req, res) => {
 export const getDataReserveByDiferentParam = async (req, res) => {
     try {
         const { field, value } = req.body
-        const coleccion = await genCollection("Reserves");
+        const coleccion = db.collection("Reserves");
         console.log(field, value);
         if (field == "state") {
             let result = await coleccion.aggregate([
@@ -160,11 +189,18 @@ export const getDataReserveByDiferentParam = async (req, res) => {
                 },
                 {
                     $unwind: "$Product"
+                }, {
+                    $group: {
+                        _id: "$_id",
+                        User: { $first: "$User" },
+                        Product: { $first: "$Product" },
+                        reservedDate: { $first: "$reservedDate" },
+                        state: { $first: "$state" }
+                    }
                 },
                 {
                     $project: {
                         user: 0,
-
                         "User._id": 0,
                         "Product._id": 0
                     }
@@ -197,6 +233,14 @@ export const getDataReserveByDiferentParam = async (req, res) => {
                 },
                 {
                     $unwind: "$Product"
+                }, {
+                    $group: {
+                        _id: "$_id",
+                        User: { $first: "$User" },
+                        Product: { $first: "$Product" },
+                        reservedDate: { $first: "$reservedDate" },
+                        state: { $first: "$state" }
+                    }
                 },
                 {
                     $project: {
@@ -208,6 +252,7 @@ export const getDataReserveByDiferentParam = async (req, res) => {
                 },
                 { $sort: { "reservedDate": -1 } }
             ]).toArray();
+
             (result.length > 0) ? result = res.send(result).status(200) : result = res.status(404).json({ message: 'Reserve not found' })
             return result
         }
@@ -221,18 +266,13 @@ export const getDataReserveByDiferentParam = async (req, res) => {
 export const postReserve = async (req, res) => {
     try {
         //Validar la informacion
-        const { product, reservedDate, state } = req.data
-        const { email: user } = req.user
+        const { product, reservedDate, state = "pendiente" } = req.data
+       const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
-        const UserCol = await genCollection("User");
-        const isMatchA = await UserCol.findOne({ email: user });
-        if (!isMatchA) { return res.status(404).json({ message: "User not found" }); }
-
-        const ProductCol = await genCollection("Product");
+       
+        const ProductCol = db.collection("Product");
         const isMatch = await ProductCol.findOne({ serial: product });
         if (!isMatch) { return res.status(404).json({ message: "Product not found" }); }
-
-        if (isMatch.stock == 0) return res.status(404).json({ message: 'There is not stock for this product.' })
 
         //Realizar el registro en la base de datos
         const ReseveObj = {
@@ -243,7 +283,7 @@ export const postReserve = async (req, res) => {
         }
 
         console.log(ReseveObj);
-        const Reserve = await genCollection("Reserves");
+        const Reserve = db.collection("Reserves");
         const newReserve = await Reserve.insertOne(ReseveObj)
         console.log(newReserve);
         let result
@@ -272,9 +312,9 @@ export const deleteReserveById = async (req, res) => {
 
 //COLECCION LOANS
 
-
 export const getDataLoanV1 = async (req, res) => {
-    const coleccion = await genCollection("Loans");
+    //const coleccion = await genCollection("Loans");
+    const coleccion = db.collection("Loans")
     let result = await coleccion.aggregate([
         {
             $lookup: {
@@ -297,6 +337,15 @@ export const getDataLoanV1 = async (req, res) => {
         },
         {
             $unwind: "$Product"
+        }, {
+            $group: {
+                _id: "$_id",
+                User: { $first: "$User" },
+                Product: { $first: "$Product" },
+                beguinDate: { $first: "$beguinDate" },
+                endDate: { $first: "$endDate" },
+                state: { $first: "$state" }
+            }
         },
         {
             $project: {
@@ -339,6 +388,15 @@ export const getDataLoanById = async (req, res) => {
             },
             {
                 $unwind: "$Product"
+            }, {
+                $group: {
+                    _id: "$_id",
+                    User: { $first: "$User" },
+                    Product: { $first: "$Product" },
+                    beguinDate: { $first: "$beguinDate" },
+                    endDate: { $first: "$endDate" },
+                    state: { $first: "$state" }
+                }
             },
             {
                 $project: {
@@ -386,6 +444,15 @@ export const getDataLoanByDate = async (req, res) => {
             },
             {
                 $unwind: "$Product"
+            }, {
+                $group: {
+                    _id: "$_id",
+                    User: { $first: "$User" },
+                    Product: { $first: "$Product" },
+                    beguinDate: { $first: "$beguinDate" },
+                    endDate: { $first: "$endDate" },
+                    state: { $first: "$state" }
+                }
             },
             {
                 $project: {
@@ -408,7 +475,7 @@ export const getDataLoanByDate = async (req, res) => {
 export const getDataLoanByDiferentParam = async (req, res) => {
     try {
         const { field, value } = req.body
-        const coleccion = await genCollection("Loans");
+        const coleccion = db.collection("Loans");
         console.log(field, value);
         if (field == "state") {
             let result = await coleccion.aggregate([
@@ -434,6 +501,15 @@ export const getDataLoanByDiferentParam = async (req, res) => {
                 },
                 {
                     $unwind: "$Product"
+                }, {
+                    $group: {
+                        _id: "$_id",
+                        User: { $first: "$User" },
+                        Product: { $first: "$Product" },
+                        beguinDate: { $first: "$beguinDate" },
+                        endDate: { $first: "$endDate" },
+                        state: { $first: "$state" }
+                    }
                 },
                 {
                     $project: {
@@ -472,6 +548,16 @@ export const getDataLoanByDiferentParam = async (req, res) => {
                     $unwind: "$Product"
                 },
                 {
+                    $group: {
+                        _id: "$_id",
+                        User: { $first: "$User" },
+                        Product: { $first: "$Product" },
+                        beguinDate: { $first: "$beguinDate" },
+                        endDate: { $first: "$endDate" },
+                        state: { $first: "$state" }
+                    }
+                },
+                {
                     $project: {
                         user: 0,
 
@@ -497,11 +583,11 @@ export const postLoan = async (req, res) => {
         console.log(req.data);
         const { email: user } = req.user
         //Revisar si este usuario ya se encuentra en la base de datos
-        const UserCol = await genCollection("User");
+        const UserCol = db.collection("User");
         const isMatchA = await UserCol.findOne({ email: user });
         if (!isMatchA) { return res.status(404).json({ message: "User not found" }); }
 
-        const ProductCol = await genCollection("Product");
+        const ProductCol = db.collection("Product");
         const isMatch = await ProductCol.findOne({ serial: product });
         if (!isMatch) { return res.status(404).json({ message: "Product not found" }); }
 
@@ -516,7 +602,7 @@ export const postLoan = async (req, res) => {
             state
         }
         console.log(ReseveObj);
-        const Loan = await genCollection("Loans");
+        const Loan = db.collection("Loans");
         const newLoan = await Loan.insertOne(ReseveObj)
         console.log(newLoan);
         let result
@@ -530,7 +616,7 @@ export const postLoan = async (req, res) => {
 
 export const verifyStock = async (id) => {
     try {
-        let producto = await genCollection("Product")
+        let producto = db.collection("Product")
         let thereAreStock = producto.findOne({ serial: id })
         if (thereAreStock.stock <= 0) return false
         else return true
@@ -544,7 +630,7 @@ export const updateLoan = async (req, res) => {
         const { IDproducto, identificador, response } = req.body
         if (response === "aprobada") {
             if (!verifyStock(IDproducto)) return res.status(404).send({ error: ["There are no Stock for this product"] })
-            let Prestamo = await genCollection("Loans")
+            let Prestamo = db.collection("Loans")
             let setState = Prestamo.updateOne(
                 {
                     _id: new ObjectId(identificador),
@@ -553,7 +639,7 @@ export const updateLoan = async (req, res) => {
                     $set: { state: "aprobada" },
                 }
             )
-            let producto = await genCollection("Product")
+            let producto = db.collection("Product")
             let setStock = producto.updateOne(
                 {
                     serial: IDproducto,
@@ -566,7 +652,7 @@ export const updateLoan = async (req, res) => {
             return res.status(204).send({ message: "Loan Aproved successfully" })
         }
         else {
-            let producto = await genCollection("Loans")
+            let producto = db.collection("Loans")
             let result = producto.updateOne(
                 {
                     _id: new ObjectId(identificador),
@@ -579,7 +665,7 @@ export const updateLoan = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ error:["Something went wrong"]})
+        return res.status(500).send({ error: ["Something went wrong"] })
     }
 }
 
@@ -587,7 +673,7 @@ export const updateLoan = async (req, res) => {
 
 export const deleteLoanById = async (req, res) => {
     try {
-        const coleccion = await genCollection("Loans");
+        const coleccion = db.collection("Loans");
         let result = await coleccion.deleteOne({ _id: new ObjectId(req.params.id) })
         console.log(result);
         (result.acknowledged && result.deletedCount !== 0) ? result = res.send({ message: 'Loan successfully removed' }).status(204) : result = res.status(404).json({ message: 'Reserve not found' })
