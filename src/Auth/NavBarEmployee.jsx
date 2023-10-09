@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 export default function NavBarEmployee() {
     
     //const pages = [{ 'name': "Products", 'link': "/products" }, { 'name': "Loans", 'link': "/loans" }, { 'name': "Reserves", 'link': "/reserves" }];
-    const pages = [{ 'name': "Añadir Libros", 'link': "/addBooks" }, { 'name': "Solicitudes", 'link': "/requests" }, { 'name': "Libros", 'link': "/books" }];
+    const pages = [{ 'name': "Añadir Libros", 'link': "/addBooks" }, { 'name': "Solicitudes", 'link': "/requests" }];
     //const pages = [{ 'name': "Añadir Empleados", 'link': "/addEmployee" }, { 'name': "Listar Empleados", 'link': "/listEmployee" }, { 'name': "Listar Usuarios", 'link': "/listUsers" }, { 'name': "Estadisticas", 'link': "/stadistics" } ];
 
 
@@ -63,7 +63,7 @@ export default function NavBarEmployee() {
                                 textDecoration: 'none',
                             }}
                         >
-                            <Link to={"/products"}>
+                            <Link to={"/requests"}>
                                 <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/8074/8074804.png" />
                             </Link>
 

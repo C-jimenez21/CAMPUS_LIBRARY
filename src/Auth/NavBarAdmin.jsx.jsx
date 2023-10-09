@@ -19,7 +19,7 @@ export default function NavBarAdmin() {
     
     //const pages = [{ 'name': "Products", 'link': "/products" }, { 'name': "Loans", 'link': "/loans" }, { 'name': "Reserves", 'link': "/reserves" }];
     //const pages = [{ 'name': "Añadir Libros", 'link': "/addBooks" }, { 'name': "Solicitudes", 'link': "/requests" }, { 'name': "Libros", 'link': "/books" }];
-    const pages = [{ 'name': "Añadir Empleados", 'link': "/addEmployee" }, { 'name': "Listar Empleados", 'link': "/listEmployee" }, { 'name': "Listar Usuarios", 'link': "/listUsers" }, { 'name': "Estadisticas", 'link': "/stadistics" } ];
+    const pages = [{ 'name': "Añadir Empleados", 'link': "/addEmployee" }, { 'name': "Listar Usuarios", 'link': "/listUsers" } ];
 
 
 
@@ -64,7 +64,7 @@ pages
                                 textDecoration: 'none',
                             }}
                         >
-                            <Link to={"/products"}>
+                            <Link to={"/listUsers"}>
                                 <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/8074/8074804.png" />
                             </Link>
 

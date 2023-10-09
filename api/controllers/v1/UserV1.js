@@ -120,7 +120,7 @@ export const getDataLoanV1 = async (req, res) => {
 
 export const deleteUserById = async (req, res) => {
   try {
-    const coleccion = await genCollection("User");
+    const coleccion = await db.collection("User");
     let result = await coleccion.deleteOne({email:req.params.id})
     console.log(result);
     (result.acknowledged && result.deletedCount !== 0) ? result = res.send({message: 'Product successfully removed'}).status(204) : result = res.status(404).json({ message: 'Product not found' })
